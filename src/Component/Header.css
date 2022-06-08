@@ -1,0 +1,58 @@
+#head{
+    padding: 5px 0px;
+    background-color: #0B2728;
+}
+#head nav ul li a{
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0px 10px;
+}
+.langButton{
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0px 10px; 
+    background:none;
+    border:none;
+    color: #fff;
+}
+.green{
+    color: green;
+}
+#head .social-links a{
+    padding: 0px 8px;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+}
+#head .social-links a img{
+    max-height: 18px;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+  }
+  
+  .navbar-toggler-icon {
+    border-color: rgb(255,102,203) !important;
+  }
+
+  .navbar-light .navbar-toggler{
+      font-size: 14px;
+      color: #fff !important;
+      border: 2px solid #fff !important;
+      box-shadow: none;
+  }
+
+  .dropdown-item:active, .dropdown-item:hover{
+      background-color: #212529;
+  }
+
+@media only screen and (max-width: 768px) {
+    .navbar-collapse{
+        position: absolute;
+        background-color: #0B2728;
+        padding: 10px;
+        margin-top: 10px;
+        width: 90%;
+    }
+}

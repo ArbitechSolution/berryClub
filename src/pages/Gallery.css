@@ -1,0 +1,102 @@
+#gallery{
+    padding: 120px 0px 60px 0px;
+    background-image: url('../media/head-bg.png');
+    background-position: center;
+    background-size: cover;
+  }
+  
+  #gallery .container{
+  background: rgba(0, 0, 0, 0.75);
+  padding: 60px 0px;
+  border-radius: 10px;
+  }
+
+  #MainGallery{
+    padding: 60px 0px;
+  }
+
+  #MainGallery ul{
+    list-style-type: none !important;
+    padding: 0px 5px;
+
+  }
+
+  #MainGallery .filter-box .top-bar .reload button{
+    background: none;
+    border: none;
+    padding: 0;
+    color: #fff;
+  }
+
+  #MainGallery .filter-box .all-filters ul li{
+    padding: 0px;
+    font-size: 16px;
+  }
+  #MainGallery .filter-box .all-filters ul li button{
+    background: none;
+    padding: 0px;
+    border: none;
+    color: #fff;
+  }
+  #MainGallery .filter-box .all-filters ul hr{
+    margin: 0.5rem 0;
+    color: #13714D;
+  }
+
+  #MainGallery .main-gallery .head .search-box input{
+    max-width: 200px;
+    padding: 6px;
+    background: rgba(19, 113, 77, 0.2);
+    border: 1px solid #13714D;
+    border-radius: 6px;
+  }
+
+  #MainGallery .main-gallery .gallery-items .image-name{
+    background: #274285;
+    border-radius: 0px 0px 15px 15px;
+  }
+
+  #MainGallery .main-gallery .gallery-items .image-box{
+    padding: 10px;
+  }
+
+  #MainGallery .main-gallery .gallery-items .image-box img{
+    border-radius: 20px 20px 0px 0px;
+  }
+
+  #myNFT button{
+    background: #FFFFFF;
+    padding: 10px 30px;
+    font-weight: 600;
+    border: 3px solid #2F1254;
+    border-radius: 50px;
+  }
+
+  #tabs{
+    padding-top: 60px;
+  }
+
+  .nav-tabs, .nav-tabs .nav-link{
+    border-bottom: none;
+  }
+
+  .nav-tabs .nav-item{
+    padding: 0px 20px;
+    font-weight: 600;
+  }
+
+  .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover{
+    border: none !important;
+
+  }
+
+  .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+    text-align: center;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 30px
+  }
+
+  .nav-tabs .nav-link.active{
+    background: #2EBA85;
+  }
