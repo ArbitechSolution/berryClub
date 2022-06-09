@@ -373,13 +373,17 @@ const Gallery = () => {
                                   className="col-6 col-sm-4 col-md-4 image-box"
                                   key={post.name}
                                 >
+                                  
+                                
                                   <img
+                                  
                                     blurRadius={100}
                                     src={post.image}
                                     className="lazyload img img-fluid"
                                     alt="NO:ZE"
                                     loading="lazy"
                                   />
+                                 
                                   <h5 className="image-name py-2">
                                     {post.name}
                                   </h5>
