@@ -20,9 +20,10 @@ const Gallery = () => {
   let [limit, setLimit] = useState(12);
   let [preFixing, setPrefixing] = useState(false);
   let [initialLimit, setInitialLimit] = useState(0);
-  let [showLoading, setShowLoading] = useState(true);
+  let [showLoading, setShowLoading] = useState(false);
   let [imageArray, setImageArray] = useState([]);
   let dummayArr = [];
+  let searchItembyEdition = useRef();
 
   let [imageArrayLength, setImageArrayLength] = useState(Data.length);
   let sumLimit = 12;
@@ -60,12 +61,14 @@ const Gallery = () => {
   const getImages = () => {
     let myFilteredLocalData = JSON.parse(localStorage.getItem("myLocalData"));
     console.log("myFilteredLocalData", myFilteredLocalData);
-    console.log("Filtered length", myFilteredLocalData);
+    // console.log("Filtered length", myFilteredLocalData);
 
     if (myFilteredLocalData) {
+      setShowLoading(true);
       console.log("myFilteredLocalData length", myFilteredLocalData.length);
       setImageArrayLength(myFilteredLocalData.length);
       console.log("Will Load Filter Data", filterData.length);
+
       for (let i = sumInitLimit; i < sumLimit; i++) {
         let myData = myFilteredLocalData[i];
         dummayArr = [...dummayArr, myData];
@@ -77,17 +80,17 @@ const Gallery = () => {
       setShowLoading(false);
       setPrefixing(false);
     } else {
-      console.log("Will Load All Data");
+      // console.log("Will Load All Data");
       setImageArrayLength(Data.length);
 
-      console.log("items", items);
+      // console.log("items", items);
       for (let i = sumInitLimit; i < sumLimit; i++) {
         let myData = items[i];
         dummayArr = [...dummayArr, myData];
       }
       sumInitLimit = sumInitLimit + 12;
       sumLimit = sumLimit + 12;
-      console.log("DummyArray from all data", dummayArr);
+      // console.log("DummyArray from all data", dummayArr);
       setImageArray(dummayArr);
       setShowLoading(false);
       setPrefixing(false);
@@ -97,29 +100,27 @@ const Gallery = () => {
   };
 
   const filterItem = (param) => {
+    // let updatedItems = [];
     setPrefixing(true);
     setImageArray(null);
+    console.log("for loop", param);
 
-    console.log("Param in filter = ", param);
-    console.log("setPrefixing", preFixing);
     const updatedItems = Data.filter((curElem) => {
+      // console.log("curElem", curElem);
       localStorage.clear();
-
-      // return curElem.attributes[0].trait_type === param;
-
       for (var i = 0; i < curElem.attributes.length; i++) {
         if (curElem.attributes[i].trait_type === param) {
           return curElem.attributes[i].trait_type === param;
         }
       }
     });
-    console.log("Updated Item Length", updatedItems.length);
+    // console.log("Updated Item Length", updatedItems.length);
     if (updatedItems.length >= 1) {
       if (updatedItems.length < 10000) {
         localStorage.setItem("myLocalData", JSON.stringify(updatedItems));
         setImageArrayLength(updatedItems.length);
-        // setImageArray(updatedItems);
-        console.log("updated items", updatedItems);
+        setImageArray(updatedItems);
+        // console.log("updated items", updatedItems);
         getImages();
       } else {
         localStorage.setItem("myLocalData", JSON.stringify(null));
@@ -127,7 +128,7 @@ const Gallery = () => {
         getImages();
       }
     } else {
-      console.log("No Data found Agains this trait type");
+      // console.log("No Data found Agains this trait type");
       setImageArrayLength(0);
     }
 
@@ -162,12 +163,36 @@ const Gallery = () => {
 
   //Search Feature needs to be fixed....
 
-  const SearchValue = (value) => {
-    const searchItem = Data.filter((curElem) => {
-      return curElem.edition === value;
-    });
+  const SearchValue = () => {
+    setShowLoading(false);
 
-    setItems(searchItem);
+    let dummArr = [];
+    setPrefixing(true);
+    setImageArray(null);
+    let value = searchItembyEdition.current.value;
+    console.log("User Searched for ", value);
+    for (let i = 0; i <= Data.length; i++) {
+      console.log("for loop", i);
+      console.log("Edition", Data[i].edition);
+      if (Data[i].edition == value) {
+        console.log("Edition Entered IF ", Data[i].edition);
+        dummArr.push(Data[i]);
+        setImageArrayLength(1);
+        setPrefixing(false);
+
+        console.log("Hurrah got the id", Data[i]);
+        return;
+      }
+      setShowLoading(false);
+      setImageArray(dummArr);
+    }
+    // const searchItem = Data.find((a) => {
+    //   return a.edition === value;
+    // });
+    // const searchItem = Data.filter((curElem) => {
+    //   return curElem.edition === value;
+    // });
+    // setImageArray(searchItem);
   };
   const handleScroll = (e) => {
     console.log("Scrolling");
@@ -175,7 +200,7 @@ const Gallery = () => {
     let winTop = e.target.documentElement.scrollTop;
     let winHeight = window.innerHeight;
     let scrollHeight = e.target.documentElement.scrollHeight;
-    let sumHeight = parseInt(winTop) + parseInt(winHeight) + 160;
+    let sumHeight = parseInt(winTop) + parseInt(winHeight);
     if (sumHeight + 1 >= scrollHeight) {
       setInitialLimit(limit + 12);
       setLimit(limit + 12);
@@ -296,24 +321,24 @@ const Gallery = () => {
                               </button>
                             </li>
                             <hr />
-                            <li>
+                            {/* <li>
                               <button onClick={() => filterItem("Hat")}>
                                 Hat
                               </button>
                             </li>
-                            <hr />
+                            <hr /> */}
                             <li>
                               <button onClick={() => filterItem("Lips")}>
                                 Lips
                               </button>
                             </li>
                             <hr />
-                            <li>
+                            {/* <li>
                               <button onClick={() => filterItem("Mask")}>
                                 Mask
                               </button>
                             </li>
-                            <hr />
+                            <hr /> */}
                             <li>
                               <button
                                 onClick={() => filterItem("Neck jewelry")}
@@ -341,60 +366,70 @@ const Gallery = () => {
                       <div className="head d-flex justify-content-between">
                         <div className="total">{imageArrayLength} items</div>
                         <div className="search-box">
-                          <input
-                            type="number"
-                            placeholder="Number"
-                            onChange={(e) => SearchValue(e.target.value)}
-                            name="Number"
-                            id=""
-                          />
+                          <span>
+                            <input
+                              type="number"
+                              ref={searchItembyEdition}
+                              placeholder="Number"
+                              name="Number"
+                              id=""
+                            />
+                          </span>
+                          <span>
+                            <button
+                              onClick={() => SearchValue()}
+                              className="ms-4 mySearchButton"
+                            >
+                              Search
+                            </button>
+                          </span>
                         </div>
                       </div>
-                      {preFixing ? (
-                        <p className="mt-5 ms-5">
-                          No Image Against this Trait type
-                        </p>
-                      ) : (
-                        // <Loading className="ms-5" />
-                        <div className="row gallery-items d-flex text-center pt-5">
-                          {/* // Data.filter(items=> items.attributes[0].trait_type === value ).map(post =>{ */}
-                          {/* <img
+
+                      <div>
+                        {preFixing ? (
+                          <p className="mt-5 ms-5">No Image Against this Id</p>
+                        ) : (
+                          // <Loading className="ms-5" />
+
+                          <div className="row gallery-items d-flex text-center pt-5">
+                            {/* // Data.filter(items=> items.attributes[0].trait_type === value ).map(post =>{ */}
+                            {/* <img
                           src={post.image}
                           className="img img-fluid"
                           alt=""
                         /> */}
 
-                          {imageArray
-                            .sort((a, b) => a.edition - b.edition)
-                            .map((post, i) => {
+                            {imageArray.map((post, i) => {
                               // console.log("post mage", post.image);
                               return (
                                 <div
                                   className="col-6 col-sm-4 col-md-4 image-box"
                                   key={post.name}
                                 >
-                                  
-                                
                                   <img
-                                  
-                                    blurRadius={100}
                                     src={post.image}
                                     className="lazyload img img-fluid"
                                     alt="NO:ZE"
                                     loading="lazy"
                                   />
-                                 
+
                                   <h5 className="image-name py-2">
                                     {post.name}
                                   </h5>
                                 </div>
                               );
                             })}
-                          <div>
-                            {showLoading && <button>Loading...</button>}
+                            {/* <div>
+                            {showLoading ? (
+                              <button>Loading...</button>
+                            ) : (
+                              <p>Loading Completed</p>
+                            )}
+                          </div> */}
                           </div>
-                        </div>
-                      )}
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

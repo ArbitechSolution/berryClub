@@ -27,6 +27,15 @@
     padding: 0;
     color: #fff;
   }
+  .mySearchButton{
+    max-width: 200px;
+    background: rgba(19, 113, 77, 0.2);
+    border: 1px solid #13714D;
+    border-radius: 6px;
+    font-size: 18px;
+    padding: 5px 10px; 
+    color: white;
+  }
 
   #MainGallery .filter-box .all-filters ul li{
     padding: 0px;
