@@ -10,22 +10,22 @@ import G1 from "../media/g-1.png";
 import G2 from "../media/g-2.png";
 import G3 from "../media/g-3.png";
 import G4 from "../media/g-4.png";
-import { Loading } from "react-loading-dot";
-import Thumb from "../media/placeholder.jpg";
 
 const Gallery = () => {
+  let dummayArr = [];
+  let dummayArrfil = [];
   let [items, setItems] = useState(Data);
-  // let [filterData, setFilterData] = useState([]);
-  let filterData = useRef([]);
   let [limit, setLimit] = useState(12);
   let [preFixing, setPrefixing] = useState(false);
   let [initialLimit, setInitialLimit] = useState(0);
   let [showLoading, setShowLoading] = useState(false);
   let [imageArray, setImageArray] = useState([]);
-  let dummayArr = [];
   let searchItembyEdition = useRef();
-
+  let [toggle, settoggle] = useState(true);
   let [imageArrayLength, setImageArrayLength] = useState(Data.length);
+  let [sumLimitfil, setsumLimitfil] = useState(12);
+  let [sumInitLimitfil, setsumInitLimitfil] = useState(0);
+
   let sumLimit = 12;
   let sumInitLimit = 0;
 
@@ -58,29 +58,41 @@ const Gallery = () => {
     },
   };
 
+  const gettingMyfilteredImages = () => {
+    console.log("Image rrasdfasd23", dummayArrfil);
+    let myFilteredLocalData = JSON.parse(
+      window.localStorage.getItem("myLocalData")
+    );
+    console.log("myFilt rrasdfasd234", myFilteredLocalData);
+    setShowLoading(true);
+    setImageArrayLength(myFilteredLocalData.length);
+    console.log("sumInitLimitfil", sumInitLimitfil);
+    console.log("sumInitLimitfil1", sumLimitfil);
+
+    for (let i = sumInitLimitfil; i < sumLimitfil; i++) {
+      // console.log(`myFilteredLocalData${i}`, myFilteredLocalData[i]);
+      dummayArrfil = [...dummayArrfil, myFilteredLocalData[i]];
+    }
+    setsumInitLimitfil(sumInitLimitfil + 12);
+    setsumLimitfil(sumLimitfil + 12);
+    console.log("DummyArray from Filterd Data", dummayArrfil);
+    setImageArray(dummayArrfil);
+    setShowLoading(false);
+    setPrefixing(false);
+  };
+
   const getImages = () => {
-    let myFilteredLocalData = JSON.parse(localStorage.getItem("myLocalData"));
+    // dummayArrfil = [];
+    setImageArray([]);
+    let myFilteredLocalData = JSON.parse(
+      window.localStorage.getItem("myLocalData")
+    );
     console.log("myFilteredLocalData", myFilteredLocalData);
-    // console.log("Filtered length", myFilteredLocalData);
 
     if (myFilteredLocalData) {
-      setShowLoading(true);
-      console.log("myFilteredLocalData length", myFilteredLocalData.length);
-      setImageArrayLength(myFilteredLocalData.length);
-      console.log("Will Load Filter Data", filterData.length);
-
-      for (let i = sumInitLimit; i < sumLimit; i++) {
-        let myData = myFilteredLocalData[i];
-        dummayArr = [...dummayArr, myData];
-      }
-      sumInitLimit = sumInitLimit + 12;
-      sumLimit = sumLimit + 12;
-      console.log("DummyArray from Filterd Data", dummayArr);
-      setImageArray(dummayArr);
-      setShowLoading(false);
-      setPrefixing(false);
+      gettingMyfilteredImages();
     } else {
-      // console.log("Will Load All Data");
+      console.log("Will Load All Data");
       setImageArrayLength(Data.length);
 
       // console.log("items", items);
@@ -100,14 +112,16 @@ const Gallery = () => {
   };
 
   const filterItem = (param) => {
-    // let updatedItems = [];
+    console.log("Image rrasdfasd1", imageArray);
+    dummayArrfil.length = 0;
+    console.log("Image rrasdfasd2", dummayArrfil);
+
+    window.localStorage.clear();
     setPrefixing(true);
-    setImageArray(null);
     console.log("for loop", param);
 
     const updatedItems = Data.filter((curElem) => {
       // console.log("curElem", curElem);
-      localStorage.clear();
       for (var i = 0; i < curElem.attributes.length; i++) {
         if (curElem.attributes[i].trait_type === param) {
           return curElem.attributes[i].trait_type === param;
@@ -116,59 +130,44 @@ const Gallery = () => {
     });
     // console.log("Updated Item Length", updatedItems.length);
     if (updatedItems.length >= 1) {
-      if (updatedItems.length < 10000) {
-        localStorage.setItem("myLocalData", JSON.stringify(updatedItems));
+      if (updatedItems.length < 9000) {
+        console.log("sent to Local Storage", dummayArrfil.length);
+        window.localStorage.setItem(
+          "myLocalData",
+          JSON.stringify(updatedItems)
+        );
         setImageArrayLength(updatedItems.length);
-        setImageArray(updatedItems);
+        // setImageArray(updatedItems);
         // console.log("updated items", updatedItems);
         getImages();
       } else {
-        localStorage.setItem("myLocalData", JSON.stringify(null));
+        console.log(" Local Storage set to Null");
+
+        window.localStorage.setItem("myLocalData", JSON.stringify(null));
         setImageArrayLength(updatedItems.length);
         getImages();
       }
     } else {
       // console.log("No Data found Agains this trait type");
+      console.log("hahhaha bro no images try again");
+
       setImageArrayLength(0);
     }
-
-    // filterData.current.value = updatedItems;
-    // setFilterData(updatedItems);
-    // setItems(updatedItems);
-
-    // setImageArrayLength(updatedItems.length);
-    // for (let i = sumInitLimit; i < sumLimit; i++) {
-    //   let myFilteredData = updatedItems[i];
-    //   filteredArray = [...filteredArray, myFilteredData];
-    // }
-    // sumInitLimit = sumInitLimit + 12;
-    // sumLimit = sumLimit + 12;
-    // console.log("filteredArray", filteredArray);
-    // setImageArray(filteredArray);
-    // setShowLoading(false);
-    // setImageArray(updatedItems);
   };
 
   const reloadAll = (param) => {
-    localStorage.clear();
+    window.localStorage.clear();
+    // localStorage.clear();
     getImages();
-    // setFilterData([]);
-    // filterData.current.value = [];
-    // const loadAllData = Data.filter((curElem) => {
-    //   return curElem.description === "";
-    // });
-
-    // setItems(loadAllData);
   };
 
   //Search Feature needs to be fixed....
 
   const SearchValue = () => {
     setShowLoading(false);
-
     let dummArr = [];
     setPrefixing(true);
-    setImageArray(null);
+    setImageArray([]);
     let value = searchItembyEdition.current.value;
     console.log("User Searched for ", value);
     for (let i = 0; i <= Data.length; i++) {
@@ -208,17 +207,14 @@ const Gallery = () => {
 
       console.log("Reached at the bottom of the page");
     }
-    // console.log("winTop", winTop);
-    // console.log("winHeight", winHeight);
-    // console.log("scrollHeight", scrollHeight);
   };
 
   useEffect(() => {
-    localStorage.clear();
+    window.localStorage.clear();
+    getImages();
   }, []);
 
   useEffect(() => {
-    getImages();
     window.addEventListener("scroll", handleScroll);
   }, []);
   return (
@@ -405,7 +401,7 @@ const Gallery = () => {
                               return (
                                 <div
                                   className="col-6 col-sm-4 col-md-4 image-box"
-                                  key={post.name}
+                                  key={i}
                                 >
                                   <img
                                     src={post.image}
