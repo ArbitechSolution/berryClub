@@ -15,6 +15,7 @@ const Gallery = () => {
   let dummayArr = [];
   let dummayArrfil = [];
   let [items, setItems] = useState(Data);
+  let [fiteredItems, setFilteredItems] = useState(Data);
   let [limit, setLimit] = useState(12);
   let [preFixing, setPrefixing] = useState(false);
   let [initialLimit, setInitialLimit] = useState(0);
@@ -69,14 +70,14 @@ const Gallery = () => {
     console.log("sumInitLimitfil", sumInitLimitfil);
     console.log("sumInitLimitfil1", sumLimitfil);
 
-    for (let i = sumInitLimitfil; i < sumLimitfil; i++) {
-      // console.log(`myFilteredLocalData${i}`, myFilteredLocalData[i]);
-      dummayArrfil = [...dummayArrfil, myFilteredLocalData[i]];
-    }
+    // for (let i = sumInitLimitfil; i < sumLimitfil; i++) {
+    //   // console.log(`myFilteredLocalData${i}`, myFilteredLocalData[i]);
+    //   dummayArrfil = [...dummayArrfil, myFilteredLocalData[i]];
+    // }
     setsumInitLimitfil(sumInitLimitfil + 12);
     setsumLimitfil(sumLimitfil + 12);
     console.log("DummyArray from Filterd Data", dummayArrfil);
-    setImageArray(dummayArrfil);
+    setImageArray(myFilteredLocalData);
     setShowLoading(false);
     setPrefixing(false);
   };
@@ -215,7 +216,7 @@ const Gallery = () => {
   }, []);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    // window.addEventListener("scroll", handleScroll);
   }, []);
   return (
     <>
