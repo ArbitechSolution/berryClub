@@ -25,3 +25,15 @@
     border: 3px solid #2EBA85;
     border-radius: 20px;
 }
+.anchorTags{
+    /* text-decoration: underline !important; */
+    border-bottom: 2px solid white;
+    color: #ffffff !important;
+    font-size: 20px;
+    font-weight: 500;
+}
+.anchorTags:hover{
+    color: rgb(9, 250, 21) !important;
+    border-bottom: 2px solid rgb(9, 250, 21);
+
+}
