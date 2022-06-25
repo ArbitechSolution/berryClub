@@ -10,14 +10,23 @@ import G1 from "../media/g-1.png";
 import G2 from "../media/g-2.png";
 import G3 from "../media/g-3.png";
 import G4 from "../media/g-4.png";
+import {
+  berryClubCntractAddress,
+  berryClubContractAbi,
+} from "../Component/Utils/BerryClub";
+import { loadWeb3 } from "../Component/Api/api";
+
 const Gallery = () => {
   let dummayArr = [];
   let dummayArrfil = [];
   let [items, setItems] = useState(Data);
+  let [buttonTxt, setButtonText] = useState("CONNECT WALLET");
+  let [account, setAccount] = useState();
+
   let [filterItems, setFilterItems] = useState(Data);
   const [arrSliceLimit, setarrSliceLimit] = useState(12);
   let limit = 12;
-
+  let [myNftArray, setmyNftArray] = useState([]);
   let [preFixing, setPrefixing] = useState(false);
   let [initialLimit, setInitialLimit] = useState(0);
   let [showLoading, setShowLoading] = useState(false);
@@ -30,6 +39,17 @@ const Gallery = () => {
 
   let sumLimit = 12;
   let sumInitLimit = 0;
+
+  const getWalletAddress = async () => {
+    try {
+      let acc = await loadWeb3();
+      console.log("Account=", acc);
+      setButtonText(acc);
+      setAccount(acc);
+    } catch (e) {
+      console.log("Error while getting user Address");
+    }
+  };
 
   const gallery1 = {
     autoplay: false,
@@ -194,7 +214,39 @@ const Gallery = () => {
       console.log("calling function on scrolling");
     }
   };
-  console.log(limit);
+
+  const getMyNfts = async () => {
+    try {
+      if (account == "No Wallet") {
+        setButtonText("Connect Wallet");
+        console.log("Not Connected");
+      } else if (account == "Wrong Network") {
+        setButtonText("Wrong Network");
+        console.log("Not Connected");
+      } else if (account == "Connect Wallet") {
+        setButtonText(account);
+        console.log("Not Connected");
+      } else {
+        let dummy = [];
+        const web3 = window.web3;
+        const contractOf = new web3.eth.Contract(
+          berryClubContractAbi,
+          berryClubCntractAddress
+        );
+        let totaNftIds = await contractOf.methods.walletOfOwner(account).call();
+        for (let i = 0; i < totaNftIds.length; i++) {
+          console.log("totaNftIdds", totaNftIds[i]);
+          let d = items.filter((e) => e.edition == totaNftIds[i]);
+          dummy = [...dummy, d];
+          console.log("filtered =", d);
+        }
+        setmyNftArray(dummy);
+      }
+    } catch (e) {
+      console.log("error while getting nfts", e);
+    }
+  };
+
   useEffect(() => {
     setInterval(() => {
       // setarrSliceLimit((arrS liceLimit) => arrSliceLimit + 12);
@@ -211,6 +263,11 @@ const Gallery = () => {
     let d = items.filter((e) => e.edition == value);
     setFilterItems(d);
   };
+
+  useEffect(() => {
+    getMyNfts();
+  }, [account]);
+
   return (
     <>
       <section id="gallery">
@@ -440,12 +497,39 @@ const Gallery = () => {
               <section id="myNFT">
                 <div className="container">
                   <div className="row">
-                    <div className="col-12 text-center py-5">
-                      <p>
+                    <div className="col-12   text-center py-5">
+                      <div className="row gallery-items d-flex text-center pt-5">
+                        {myNftArray.map((post) => {
+                          console.log("post image myNft ", myNftArray);
+                          console.log("post imaes,", post[0].name);
+                          return (
+                            <div
+                              className="col-6 col-sm-4 col-md-4 image-box"
+                              key={post[0].dna}
+                            >
+                              <img
+                                src={post[0].image}
+                                className="lazyload img img-fluid"
+                                alt="NO:ZE"
+                                loading="lazy"
+                              />
+
+                              <h5 className="image-name py-2">
+                                {post[0].name}
+                              </h5>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* <p>
                         Please connect your wallet to view your BerryClub NFTs.
-                      </p>
-                      <button className="connect-wallet mt-4">
-                        CONNECT WALLET
+                      </p> */}
+                      <button
+                        onClick={() => getWalletAddress()}
+                        className="connect-wallet mt-4"
+                      >
+                        {buttonTxt}
                       </button>
                     </div>
                   </div>

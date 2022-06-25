@@ -1,12 +1,66 @@
+import { useEffect, useState } from "react";
+
 import "./Minting.css";
 import Footer from "../Component/Footer";
 import PrivateSale from "../media/private-sale.png";
 import Girl from "../media/girl.png";
 import { useTranslation } from "react-i18next";
+import {
+  berryClubCntractAddress,
+  berryClubContractAbi,
+} from "../Component/Utils/BerryClub";
 import { loadWeb3 } from ".././Component/Api/api";
+// import  toast  from "react-toastify";
+
 const Minting = () => {
   let [t, i18n] = useTranslation();
-  // let [account, setAccount] = useState();
+  let [account, setAccount] = useState();
+
+  const getWalletAddress = async () => {
+    try {
+      let acc = await loadWeb3();
+      console.log("Account=", acc);
+      setAccount(acc);
+    } catch (e) {
+      console.log("Error while getting user Address");
+    }
+  };
+  const mintNfts = async () => {
+    try {
+      if (account == "No Wallet") {
+        //   setBtTxt("Connect Wallet")
+        console.log("Not Connected");
+      } else if (account == "Wrong Network") {
+        //   setBtTxt("Wrong Network")
+        console.log("Not Connected");
+      } else if (account == "Connect Wallet") {
+        console.log("Not Connected");
+      } else {
+        const web3 = window.web3;
+        let contractOf = new web3.eth.Contract(
+          berryClubContractAbi,
+          berryClubCntractAddress
+        );
+        let totaNftIds = await contractOf.methods.walletOfOwner(account).call();
+        if (totaNftIds.length > 0) {
+          // toast.info("You Have Performed minting already ");
+        } else {
+          await contractOf.methods.claim_NFT().send({
+            from: account,
+          });
+          // toast.success("Transaction Successfull");
+        }
+      }
+    } catch (e) {
+      console.log("Error While Minting", e);
+      // toast.error("Transaction Failed");
+    }
+  };
+
+  useEffect(() => {
+    getWalletAddress();
+  }, []);
+
   return (
     <>
       <section id="minting">
@@ -33,7 +87,9 @@ const Minting = () => {
                   </a>
                 </p>
               </div>
-              <button className="mint-btn">MINT</button>
+              <button onClick={() => mintNfts()} className="mint-btn">
+                MINT
+              </button>
             </div>
           </div>
         </div>
