@@ -45,7 +45,7 @@ const Minting = () => {
         let totaNftIds = await contractOf.methods.walletOfOwner(account).call();
         if (totaNftIds.length > 0) {
           console.log(" You have already performed minting");
-          toast.error("You Have Performed minting already ", {
+          toast.error("You Have already Performed minting. ", {
             position: "top-right",
           });
         } else {
