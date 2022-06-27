@@ -3,14 +3,15 @@ import { useEffect, useState } from "react";
 import "./Minting.css";
 import Footer from "../Component/Footer";
 import PrivateSale from "../media/private-sale.png";
+import toast, { Toaster } from "react-hot-toast";
 import Girl from "../media/girl.png";
 import { useTranslation } from "react-i18next";
 import {
   berryClubCntractAddress,
   berryClubContractAbi,
 } from "../Component/Utils/BerryClub";
+
 import { loadWeb3 } from ".././Component/Api/api";
-// import  toast  from "react-toastify";
 
 const Minting = () => {
   let [t, i18n] = useTranslation();
@@ -43,17 +44,24 @@ const Minting = () => {
         );
         let totaNftIds = await contractOf.methods.walletOfOwner(account).call();
         if (totaNftIds.length > 0) {
-          // toast.info("You Have Performed minting already ");
+          console.log(" You have already performed minting");
+          toast.error("You Have Performed minting already ", {
+            position: "top-right",
+          });
         } else {
           await contractOf.methods.claim_NFT().send({
             from: account,
           });
-          // toast.success("Transaction Successfull");
+          toast.success("Transaction Successfull", {
+            position: "top-right",
+          });
         }
       }
     } catch (e) {
       console.log("Error While Minting", e);
-      // toast.error("Transaction Failed");
+      toast.error("Transaction Failed", {
+        position: "top-right",
+      });
     }
   };
 
