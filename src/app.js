@@ -4,13 +4,14 @@ import toast, { Toaster } from "react-hot-toast";
 import Header from "./Component/Header";
 import Home from "./pages/Home";
 import Minting from "./pages/Minting";
+import { ToastContainer, toast } from "react-toastify";
 import Gallery from "./pages/Gallery";
 import PublicSale from "./pages/PublicSale";
 import NoPage from "./pages/NoPage";
 export default function App() {
   return (
     <div>
-      <Toaster />{" "}
+      <ToastContainer />{" "}
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<Home />} />

@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import "./Minting.css";
 import Footer from "../Component/Footer";
 import PrivateSale from "../media/private-sale.png";
-import toast, { Toaster } from "react-hot-toast";
+import { toast } from "react-toastify";
+
 import Girl from "../media/girl.png";
 import { useTranslation } from "react-i18next";
 import {
@@ -45,23 +46,17 @@ const Minting = () => {
         let totaNftIds = await contractOf.methods.walletOfOwner(account).call();
         if (totaNftIds.length > 0) {
           console.log(" You have already performed minting");
-          toast.error("You Have already Performed minting. ", {
-            position: "top-right",
-          });
+          toast.info("You Have already Performed minting. ");
         } else {
           await contractOf.methods.claim_NFT().send({
             from: account,
           });
-          toast.success("Transaction Successfull", {
-            position: "top-right",
-          });
+          toast.success("Transaction Successfull");
         }
       }
     } catch (e) {
       console.log("Error While Minting", e);
-      toast.error("Transaction Failed", {
-        position: "top-right",
-      });
+      toast.error("Transaction Failed");
     }
   };
 
