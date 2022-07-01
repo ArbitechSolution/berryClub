@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
 import Header from "./Component/Header";
 import Home from "./pages/Home";
 import Minting from "./pages/Minting";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Gallery from "./pages/Gallery";
 import PublicSale from "./pages/PublicSale";
 import NoPage from "./pages/NoPage";
