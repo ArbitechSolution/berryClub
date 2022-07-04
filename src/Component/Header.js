@@ -62,9 +62,9 @@ const Header = () => {
                     MINTING
                   </Link>
                 </li>
-                {/* <li className="nav-item">
+                <li className="nav-item">
                         <Link to="/public-sale" className="nav-link">PUBLIC SALE</Link>
-                        </li> */}
+                        </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#roadmap">
                     ROADMAP
