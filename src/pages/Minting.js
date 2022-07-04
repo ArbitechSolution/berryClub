@@ -57,6 +57,7 @@ const Minting = () => {
           toast.info("You Have already Performed minting. ");
         } else {
           let presalePrice = await contractOf.methods.PRE_SALE_PRICE().call();
+          let userBalance = await web3.eth.getBalance(account);
 
           let signature = await getSignatureTest();
           console.log("nonce = ", signature[0]);
@@ -72,16 +73,20 @@ const Minting = () => {
           if (findAdd) {
             let am = findAdd.amount;
             let totalprice = am * presalePrice;
-            console.log("totalprice", typeof totalprice.toString());
-            console.log("am", am);
+            if (parseFloat(userBalance) > parseFloat(totalprice)) {
+              console.log("totalprice", typeof totalprice.toString());
+              console.log("am", am);
 
-            await contractOf.methods
-              .claim_NFT(am, signature[0], signature[1])
-              .send({
-                value: totalprice.toString(),
-                from: account,
-              });
-            toast.success("Transaction Successfull");
+              await contractOf.methods
+                .claim_NFT(am, signature[0], signature[1])
+                .send({
+                  value: totalprice.toString(),
+                  from: account,
+                });
+              toast.success("Transaction Successfull");
+            } else {
+              toast.info("Insufficient Balance");
+            }
           } else {
             toast.info("Alas! You are not WhiteListed");
           }

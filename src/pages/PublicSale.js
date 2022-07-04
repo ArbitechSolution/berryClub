@@ -1,9 +1,135 @@
+import { useEffect, useState } from "react";
+
 import "./PublicSale.css";
 import Footer from "../Component/Footer";
 import PublicSaleImg from "../media/public-sale.png";
 import Girl from "../media/girl.png";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
+import {
+  berryClubCntractAddress,
+  berryClubContractAbi,
+} from "../Component/Utils/BerryClub";
+import { loadWeb3 } from "../Component/Api/api";
 
 const PublicSale = () => {
+  let navigate = useNavigate();
+  const [mintAmount, setMintAmount] = useState(1);
+  const [account, setAccount] = useState("Connect Wallet");
+  const [publicSalePrice, setPublicSalePrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+  //   const [userBalance, setUserBalance] = useState(0);
+
+  const getAccount = async () => {
+    let acc = await loadWeb3();
+    setAccount(acc);
+    try {
+      let web3 = window.web3;
+      let contractOf = new web3.eth.Contract(
+        berryClubContractAbi,
+        berryClubCntractAddress
+      );
+
+      let publicPrice = await contractOf.methods.PUBLIC_PRICE().call();
+      publicPrice = web3.utils.fromWei(publicPrice);
+      publicPrice = parseFloat(publicPrice).toFixed(4);
+      setTotalPrice(publicPrice);
+    } catch (e) {
+      console.log("Error in setting total amount");
+    }
+  };
+  const publicMint = async () => {
+    if (account == "No Wallet") {
+      toast.info("No Wallet Connected");
+    } else if (account == "Wrong Network") {
+      toast.info("Wrong Network");
+
+      console.log("Not Connected");
+    } else if (account == "Connect Wallet") {
+      toast.info("Connect Wallet");
+    } else {
+      try {
+        let web3 = window.web3;
+        let contractOf = new web3.eth.Contract(
+          berryClubContractAbi,
+          berryClubCntractAddress
+        );
+        let userBalance = await web3.eth.getBalance(account);
+        console.log("balance", userBalance);
+        let checkBool = await contractOf.methods.saleStarted().call();
+        let publicPrice = await contractOf.methods.PUBLIC_PRICE().call();
+        let totalprice = publicPrice * mintAmount;
+
+        if (checkBool) {
+          if (parseFloat(userBalance) > parseFloat(totalprice)) {
+            await contractOf.methods.mint(mintAmount).send({
+              value: totalprice.toString(),
+              from: account,
+            });
+            toast.success("Transaction Successfull");
+            navigate("/gallery");
+          } else {
+            toast.info("Insufficient Balance!");
+          }
+        } else {
+          toast.info("Oops! Public Sale Not Started Yet");
+        }
+      } catch (e) {
+        toast.error("Transaction Failed!");
+        console.log("Error while public minting", e);
+      }
+    }
+  };
+  const getPrice = async () => {
+    try {
+      let web3 = window.web3;
+      let contractOf = new web3.eth.Contract(
+        berryClubContractAbi,
+        berryClubCntractAddress
+      );
+      let publicPrice = await contractOf.methods.PUBLIC_PRICE().call();
+      publicPrice = web3.utils.fromWei(publicPrice);
+      publicPrice = parseFloat(publicPrice).toFixed(4);
+      setPublicSalePrice(publicPrice);
+    } catch (e) {
+      console.log("Error While getting public sale price", e);
+    }
+  };
+
+  const increment = () => {
+    console.log("Increment", mintAmount);
+    if (mintAmount < 10) {
+      let b = mintAmount + 1;
+      let myTotalPrice = publicSalePrice * b;
+      myTotalPrice = parseFloat(myTotalPrice).toFixed(4);
+
+      setMintAmount(b);
+      setTotalPrice(myTotalPrice);
+    }
+  };
+  const decrement = () => {
+    console.log("decrement", mintAmount);
+
+    if (mintAmount > 1) {
+      let b = mintAmount - 1;
+      let myTotalPrice = publicSalePrice * b;
+
+      setMintAmount(b);
+      myTotalPrice = parseFloat(myTotalPrice).toFixed(4);
+
+      setTotalPrice(myTotalPrice);
+    }
+  };
+  useEffect(() => {
+    setInterval(() => {
+      getPrice();
+    }, [15000]);
+    getPrice();
+
+    getAccount();
+  }, []);
+
   return (
     <>
       <section id="public-sale">
@@ -21,37 +147,43 @@ const PublicSale = () => {
                   <div className="ps-mint-box">
                     <img src={Girl} alt="" width="400px" />
                     <div className="row">
-                      <div class="input-group  mt-4 col-12">
+                      <div className="input-group  mt-4 col-12">
                         <button
-                          class="btn"
+                          className="btn"
                           type="button"
                           id=""
                           style={{ color: "#595959", fontWeight: "700" }}
+                          onClick={() => decrement()}
                         >
                           -
                         </button>
-                        <input
-                          type="text"
-                          class="form-control number"
-                          placeholder="1"
-                          value="1"
-                        />
+                        <p
+                          //   type="text"
+                          className="form-control number mt-3"
+                          //   placeholder="1"
+                          //   value="1"
+                        >
+                          {mintAmount}
+                        </p>
                         <button
-                          class="btn"
+                          className="btn"
                           type="button"
                           id=""
                           style={{ color: "#595959" }}
+                          onClick={() => increment()}
                         >
                           +
                         </button>
-                        <span class="input-group-text form-control">3 max</span>
+                        <span className="input-group-text form-control">
+                          10 max
+                        </span>
                       </div>
-                      <hr class="my-3" />
+                      <hr className="my-3" />
                     </div>
 
-                    <div class="total text-white">
-                      <span class="text">Total</span>
-                      <span class="value">0.00 ETH</span>
+                    <div className="total text-white">
+                      <span className="text">Total</span>
+                      <span className="value">{totalPrice} ETH</span>
                     </div>
                   </div>
                 </div>
@@ -60,7 +192,7 @@ const PublicSale = () => {
                     <div className="box-head">
                       <span className="text fw-bold">Price per Card</span>
                       <span className="value" style={{ fontWeight: "700" }}>
-                        0.00 ETH
+                        {publicSalePrice} ETH
                       </span>
                     </div>
 
@@ -80,14 +212,30 @@ const PublicSale = () => {
                       <div className="row">
                         <div className="col-md-7 col-12 mt-2">
                           <div className="d-grid gap-2">
-                            <button className="btn btn-connect" size="lg">
-                              CONNECT WALLET
+                            <button
+                              className="btn btn-connect"
+                              size="lg"
+                              onClick={() => getAccount()}
+                            >
+                              {account === "No Wallet"
+                                ? "Connect"
+                                : account === "Connect Wallet"
+                                ? "Connect"
+                                : account === "Wrong Network"
+                                ? account
+                                : account.substring(0, 4) +
+                                  "..." +
+                                  account.substring(account.length - 4)}
                             </button>
                           </div>
                         </div>
                         <div className="col-md-5 col-12 mt-2">
                           <div className="d-grid gap-2">
-                            <button className="btn btn-Mint" size="lg">
+                            <button
+                              className="btn btn-Mint"
+                              size="lg"
+                              onClick={() => publicMint()}
+                            >
                               Mint
                             </button>
                           </div>
