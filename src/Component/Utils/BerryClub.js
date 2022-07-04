@@ -1,5 +1,5 @@
 export const berryClubCntractAddress =
-  "0x2BF0c359058597439909E3d74989cCf9Bd8CF706";
+  "0x8E37ffA5eD617E0764Fb9CEd25485720B8fc7f71";
 export const berryClubContractAbi = [
   { inputs: [], stateMutability: "nonpayable", type: "constructor" },
   {
@@ -108,20 +108,24 @@ export const berryClubContractAbi = [
     type: "event",
   },
   {
+    inputs: [{ internalType: "address", name: "signer_", type: "address" }],
+    name: "ADD_SIGNER",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
     inputs: [],
-    name: "MINT_PRICE",
+    name: "PRE_SALE_PRICE",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
   {
-    inputs: [
-      { internalType: "address[]", name: "_addresses", type: "address[]" },
-      { internalType: "uint256[]", name: "_quantity", type: "uint256[]" },
-    ],
-    name: "addWhiteList",
-    outputs: [],
-    stateMutability: "nonpayable",
+    inputs: [],
+    name: "PUBLIC_PRICE",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -142,10 +146,14 @@ export const berryClubContractAbi = [
     type: "function",
   },
   {
-    inputs: [],
+    inputs: [
+      { internalType: "uint256", name: "_count", type: "uint256" },
+      { internalType: "uint256", name: "_nonce", type: "uint256" },
+      { internalType: "bytes", name: "signature", type: "bytes" },
+    ],
     name: "claim_NFT",
     outputs: [],
-    stateMutability: "nonpayable",
+    stateMutability: "payable",
     type: "function",
   },
   {
@@ -274,15 +282,6 @@ export const berryClubContractAbi = [
     type: "function",
   },
   {
-    inputs: [
-      { internalType: "address[]", name: "_addresses", type: "address[]" },
-    ],
-    name: "removeWhitelist",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     inputs: [],
     name: "renounceOwnership",
     outputs: [],
@@ -361,6 +360,13 @@ export const berryClubContractAbi = [
     type: "function",
   },
   {
+    inputs: [],
+    name: "signer",
+    outputs: [{ internalType: "address", name: "", type: "address" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [{ internalType: "bytes4", name: "interfaceId", type: "bytes4" }],
     name: "supportsInterface",
     outputs: [{ internalType: "bool", name: "", type: "bool" }],
@@ -372,6 +378,13 @@ export const berryClubContractAbi = [
     name: "symbol",
     outputs: [{ internalType: "string", name: "", type: "string" }],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [{ internalType: "address", name: "account", type: "address" }],
+    name: "toString",
+    outputs: [{ internalType: "string", name: "", type: "string" }],
+    stateMutability: "pure",
     type: "function",
   },
   {
@@ -466,12 +479,9 @@ export const berryClubContractAbi = [
     type: "function",
   },
   {
-    inputs: [{ internalType: "address", name: "", type: "address" }],
-    name: "userInfo",
-    outputs: [
-      { internalType: "uint256", name: "quantity", type: "uint256" },
-      { internalType: "bool", name: "userStatus", type: "bool" },
-    ],
+    inputs: [{ internalType: "bytes32", name: "", type: "bytes32" }],
+    name: "usedHash",
+    outputs: [{ internalType: "bool", name: "", type: "bool" }],
     stateMutability: "view",
     type: "function",
   },
