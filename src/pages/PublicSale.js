@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
-
+import { IoMdClose } from "react-icons/io";
+import containerImage from "../media/Group 48.png";
 import "./PublicSale.css";
 import Footer from "../Component/Footer";
 import PublicSaleImg from "../media/public-sale.png";
 import Girl from "../media/girl.png";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
+import Modal from 'react-bootstrap/Modal'
 import {
   berryClubCntractAddress,
   berryClubContractAbi,
 } from "../Component/Utils/BerryClub";
 import { loadWeb3 } from "../Component/Api/api";
-
+import g1 from "../media/g-1.png"
 const PublicSale = () => {
   let navigate = useNavigate();
   const [mintAmount, setMintAmount] = useState(1);
@@ -20,7 +21,7 @@ const PublicSale = () => {
   const [publicSalePrice, setPublicSalePrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   //   const [userBalance, setUserBalance] = useState(0);
-
+  const [modalShow, setModalShow] = useState(false);
   const getAccount = async () => {
     let acc = await loadWeb3();
     setAccount(acc);
@@ -32,6 +33,7 @@ const PublicSale = () => {
       );
 
       let publicPrice = await contractOf.methods.PUBLIC_PRICE().call();
+
       publicPrice = web3.utils.fromWei(publicPrice);
       publicPrice = parseFloat(publicPrice).toFixed(4);
       setTotalPrice(publicPrice);
@@ -160,8 +162,8 @@ const PublicSale = () => {
                         <p
                           //   type="text"
                           className="form-control number mt-3"
-                          //   placeholder="1"
-                          //   value="1"
+                        //   placeholder="1"
+                        //   value="1"
                         >
                           {mintAmount}
                         </p>
@@ -197,7 +199,7 @@ const PublicSale = () => {
                     </div>
 
                     <div className="box-body text-center">
-                      <div className="content">
+                      <div className="content text-white">
                         <h4>Join the Minting right now!</h4>
                         <p>
                           You can participate in Minting by connecting wallet
@@ -220,12 +222,12 @@ const PublicSale = () => {
                               {account === "No Wallet"
                                 ? "Connect"
                                 : account === "Connect Wallet"
-                                ? "Connect"
-                                : account === "Wrong Network"
-                                ? account
-                                : account.substring(0, 4) +
-                                  "..." +
-                                  account.substring(account.length - 4)}
+                                  ? "Connect"
+                                  : account === "Wrong Network"
+                                    ? account
+                                    : account.substring(0, 4) +
+                                    "..." +
+                                    account.substring(account.length - 4)}
                             </button>
                           </div>
                         </div>
@@ -234,7 +236,10 @@ const PublicSale = () => {
                             <button
                               className="btn btn-Mint"
                               size="lg"
-                              onClick={() => publicMint()}
+                              onClick={() => {
+                                // publicMint()
+                                setModalShow(true)
+                              }}
                             >
                               Mint
                             </button>
@@ -249,6 +254,77 @@ const PublicSale = () => {
                   </div>
                 </div>
               </div>
+              {
+                modalShow ? (<Modal
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                  size="lg"
+                  aria-labelledby="contained-modal-title-vcenter"
+                  centered
+                >
+
+                  <Modal.Body className="modal-img" style={{ background: "rgb(12,30,37)", border: "3px dashed #2ADEEA" }}>
+                    <div className="staking d-flex justify-content-center " id="presale">
+                      <div className="imgArea ">
+                        <img className="stakingTop-image" src={containerImage}></img>
+                        <span className="imgArea-text">Mint</span>
+                      </div>
+                      <div className=' d-flex justify-content-end mb-4'>
+                        <div className='col-12 d-flex justify-content-end'>
+                          <IoMdClose
+                            onClick={() => setModalShow(false)}
+                            size={28}
+                            style={{ color: "white", cursor: "pointer" }}
+                          />
+                        </div>
+                      </div>
+                      <div className=" container-staking-outside ">
+                        <div className="container-fluid container-staking m-1 p-lg-5 p-md-3">
+                          <div className="row ">
+                            <div className="col-12 d-flex justify-content-end">
+                              <button
+                                className="btnConnectInPresale  mt-1 mb-1"
+                              // onClick={onConnectAccount}
+                              >
+                                Connect
+                                {/* {acc === "No Wallet"
+                  ? t("NoWallet")
+                  : acc === "Connect Wallet"
+                  ? t("Connect")
+                  : acc === "Wrong Network"
+                  ? t("WrongNetwork")
+                  : acc.substring(0, 4) + "..." + acc.substring(acc.length - 4)} */}
+                              </button>
+                            </div>
+                          </div>
+                          <div className=" mt-5 d-flex justify-content-center flex-row   g-0" >
+                            <div className="col-lg-12 col-md-12 col-sm-12  pt-3">
+                              {/* <div className="mintCard"> */}
+                                <img src={g1} className="mintImage" alt="..." />
+                                <img src={g1} className="mintImage" alt="..." />
+                                <img src={g1} className="mintImage" alt="..." />
+                                <img src={g1} className="mintImage" alt="..." />
+                                <img src={g1} className="mintImage" alt="..." />
+                                <img src={g1} className="mintImage" alt="..." />
+                                <img src={g1} className="mintImage" alt="..." />
+                                <img src={g1} className="mintImage" alt="..." />
+                                <img src={g1} className="mintImage" alt="..." />
+                                <img src={g1} className="mintImage" alt="..." />
+
+                              {/* </div> */}
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </Modal.Body>
+                </Modal>) : (
+                  <></>
+                )
+              }
             </div>
             {/* <div className="col-md-4 text-center">
                         <div className="ps-mint-box">
