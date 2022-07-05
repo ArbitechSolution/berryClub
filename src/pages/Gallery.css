@@ -72,11 +72,28 @@
   #MainGallery .main-gallery .gallery-items .image-box .imgContainer{
     /* height: 200px; */
   }
-  
+  .myNftImageBox{
+    border-radius: 20px;
+    border: 2px solid #0d3f2c;
+    margin-top: 15px;
+    /* margin: 10px; */
+  }
   #MainGallery .main-gallery .gallery-items .image-box img{
   
     border-radius: 20px 20px 0px 0px;
   }
+  .btnStakePage {
+    background: linear-gradient(90deg, #565866 1.7%, #5E606E 100%);
+    border-radius: 100px;
+    font-style: normal;
+    padding: 4px 12px;
+    font-size: 15px;
+    line-height: 17px;
+    color: black;
+}
+.btnStakePage:hover {
+  color: #ffffff;
+}
 
   #myNFT button{
     background: #FFFFFF;

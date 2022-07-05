@@ -19,6 +19,14 @@ import { loadWeb3 } from "../Component/Api/api";
 const Gallery = () => {
   let dummayArr = [];
   let dummayArrfil = [];
+  /// here starting
+  // const [showAddress, setShowAddress] = useState(true);
+  let [initialLimit, setInitialLimit] = useState(0);
+  let [pageNumber, setPageNumber] = useState(1);
+  let [finalLimit, setFinalLimit] = useState(16);
+  let [myNftArrayLength, setMyNftArraylength] = useState(0);
+  const [toatalPages, settotalPages] = useState(1);
+  //// here ending
   let [items, setItems] = useState(Data);
   let [buttonTxt, setButtonText] = useState("CONNECT WALLET");
   let [account, setAccount] = useState();
@@ -28,7 +36,6 @@ const Gallery = () => {
   let limit = 12;
   let [myNftArray, setmyNftArray] = useState([]);
   let [preFixing, setPrefixing] = useState(false);
-  let [initialLimit, setInitialLimit] = useState(0);
   let [showLoading, setShowLoading] = useState(false);
   let [imageArray, setImageArray] = useState([]);
   let searchItembyEdition = useRef();
@@ -215,6 +222,43 @@ const Gallery = () => {
     }
   };
 
+  const loadMore = () => {
+    window.scrollTo(0, 0);
+    let a = finalLimit + 16;
+    if (a >= myNftArrayLength) {
+      setInitialLimit(initialLimit + 16);
+      if (pageNumber < toatalPages) {
+        setPageNumber(pageNumber + 1);
+      }
+      console.log("Loading More Up");
+      setFinalLimit(myNftArrayLength);
+    } else {
+      console.log("Loading More");
+      if (pageNumber < toatalPages) {
+        setPageNumber(pageNumber + 1);
+      }
+      setInitialLimit(initialLimit + 16);
+      setFinalLimit(finalLimit + 16);
+    }
+  };
+
+  const loadLess = () => {
+    window.scrollTo(0, 0);
+    let b = finalLimit - 16;
+
+    if (b <= 16) {
+      setFinalLimit(16);
+      setInitialLimit(0);
+      if (pageNumber > 1) {
+        setPageNumber(pageNumber - 1);
+      }
+    } else {
+      setInitialLimit(initialLimit - 16);
+      setPageNumber(pageNumber - 1);
+      setFinalLimit(finalLimit - 16);
+    }
+  };
+
   const getMyNfts = async () => {
     try {
       if (account == "No Wallet") {
@@ -234,6 +278,11 @@ const Gallery = () => {
           berryClubCntractAddress
         );
         let totaNftIds = await contractOf.methods.walletOfOwner(account).call();
+        setMyNftArraylength(totaNftIds.length);
+        let ttlPage = parseInt(totaNftIds.length) / 16;
+        ttlPage = Math.ceil(ttlPage);
+        console.log("ttlPage", totaNftIds.length);
+        settotalPages(ttlPage);
         for (let i = 0; i < totaNftIds.length; i++) {
           console.log("totaNftIdds", totaNftIds[i]);
           let d = items.filter((e) => e.edition == totaNftIds[i]);
@@ -244,6 +293,17 @@ const Gallery = () => {
       }
     } catch (e) {
       console.log("error while getting nfts", e);
+    }
+  };
+  const transferNft = async () => {
+    try {
+      let web3 = window.web3;
+      let contractOf = new web3.eth.Contract(
+        berryClubContractAbi,
+        berryClubCntractAddress
+      );
+    } catch (e) {
+      console.log("Error while Transfer Nft");
     }
   };
 
@@ -504,7 +564,7 @@ const Gallery = () => {
                           console.log("post imaes,", post[0].name);
                           return (
                             <div
-                              className="col-6 col-sm-4 col-md-4 image-box"
+                              className="col-6 col-sm-3 col-md-3 myNftImageBox image-box"
                               key={post[0].dna}
                             >
                               <img
@@ -512,11 +572,21 @@ const Gallery = () => {
                                 className="lazyload img img-fluid"
                                 alt="NO:ZE"
                                 loading="lazy"
+                                width={"400px"}
                               />
 
                               <h5 className="image-name py-2">
                                 {post[0].name}
                               </h5>
+                              <div className="d-flex justify-content-center  mt-2 mb-2">
+                                <button
+                                  onClick={() => transferNft()}
+                                  className="btn  btnStakePage"
+                                  size="sm"
+                                >
+                                  Transfer
+                                </button>
+                              </div>
                             </div>
                           );
                         })}

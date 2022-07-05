@@ -63,8 +63,10 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                        <Link to="/public-sale" className="nav-link">PUBLIC SALE</Link>
-                        </li>
+                  <Link to="/public-sale" className="nav-link">
+                    PUBLIC SALE
+                  </Link>
+                </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#roadmap">
                     ROADMAP
