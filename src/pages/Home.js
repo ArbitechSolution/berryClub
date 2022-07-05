@@ -120,7 +120,7 @@ const Home = () => {
       <section id="gallery">
         <div className="container">
           <div
-            className="section-title text-center"
+            className="section-title text-white text-center"
             data-aos="fade-up"
             data-aos-delay="100"
           >
@@ -138,7 +138,7 @@ const Home = () => {
               <div className="img">
                 <img src={G2} alt="" />
               </div>
-              <div className="img text-center">
+              <div className="img text-white text-center">
                 <img src={ZE} alt="" />
                 <h3 className="pt-3">NO:ZE</h3>
               </div>
@@ -258,7 +258,7 @@ const Home = () => {
       <section id="partners-projects">
         <div className="container">
           <div className="row">
-            <div className="section-title text-center">
+            <div className="section-title text-white text-center">
               <h2>PARTNERS</h2>
             </div>
           </div>
@@ -269,7 +269,7 @@ const Home = () => {
             </div>
           </div>
           <div className="row">
-            <div className="section-title text-center">
+            <div className="section-title text-white text-center">
               <h2>PROJECTS</h2>
             </div>
           </div>
@@ -291,7 +291,7 @@ const Home = () => {
         <div className="container">
           <div className="row">
             {" "}
-            <div className="section-title text-center">
+            <div className="section-title text-white text-center">
               {" "}
               <h2>FAQs</h2>
             </div>

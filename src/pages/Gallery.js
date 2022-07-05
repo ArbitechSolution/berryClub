@@ -3,8 +3,13 @@ import { useState, useEffect, useRef } from "react";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import { IoMdClose } from "react-icons/io";
+import containerImage from "../media/Group 48.png";
+
 import Footer from "../Component/Footer";
 import Data from "./metadata.json";
+import { toast } from "react-toastify";
+
 import ZE from "../media/gallery-ze.png";
 import G1 from "../media/g-1.png";
 import G2 from "../media/g-2.png";
@@ -15,34 +20,40 @@ import {
   berryClubContractAbi,
 } from "../Component/Utils/BerryClub";
 import { loadWeb3 } from "../Component/Api/api";
+import Modal from "react-bootstrap/Modal";
 
 const Gallery = () => {
   let dummayArr = [];
   let dummayArrfil = [];
   /// here starting
   // const [showAddress, setShowAddress] = useState(true);
-  let [initialLimit, setInitialLimit] = useState(0);
-  let [pageNumber, setPageNumber] = useState(1);
-  let [finalLimit, setFinalLimit] = useState(16);
-  let [myNftArrayLength, setMyNftArraylength] = useState(0);
+  const [modalImage, setModalImage] = useState([]);
+  let transferAddress = useRef();
+  const [myEdition, setMyEdition] = useState();
+  const [initialLimit, setInitialLimit] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [modalShow, setModalShow] = useState(false);
+
+  const [finalLimit, setFinalLimit] = useState(16);
+  const [myNftArrayLength, setMyNftArraylength] = useState(0);
   const [toatalPages, settotalPages] = useState(1);
   //// here ending
-  let [items, setItems] = useState(Data);
-  let [buttonTxt, setButtonText] = useState("CONNECT WALLET");
-  let [account, setAccount] = useState();
+  const [items, setItems] = useState(Data);
+  const [buttonTxt, setButtonText] = useState("CONNECT WALLET");
+  const [account, setAccount] = useState();
 
-  let [filterItems, setFilterItems] = useState(Data);
+  const [filterItems, setFilterItems] = useState(Data);
   const [arrSliceLimit, setarrSliceLimit] = useState(12);
   let limit = 12;
-  let [myNftArray, setmyNftArray] = useState([]);
-  let [preFixing, setPrefixing] = useState(false);
-  let [showLoading, setShowLoading] = useState(false);
-  let [imageArray, setImageArray] = useState([]);
-  let searchItembyEdition = useRef();
-  let [toggle, settoggle] = useState(true);
-  let [imageArrayLength, setImageArrayLength] = useState(Data.length);
-  let [sumLimitfil, setsumLimitfil] = useState(12);
-  let [sumInitLimitfil, setsumInitLimitfil] = useState(0);
+  const [myNftArray, setmyNftArray] = useState([]);
+  const [preFixing, setPrefixing] = useState(false);
+  const [showLoading, setShowLoading] = useState(false);
+  const [imageArray, setImageArray] = useState([]);
+  const searchItembyEdition = useRef();
+  const [toggle, settoggle] = useState(true);
+  const [imageArrayLength, setImageArrayLength] = useState(Data.length);
+  const [sumLimitfil, setsumLimitfil] = useState(12);
+  const [sumInitLimitfil, setsumInitLimitfil] = useState(0);
 
   let sumLimit = 12;
   let sumInitLimit = 0;
@@ -296,14 +307,31 @@ const Gallery = () => {
     }
   };
   const transferNft = async () => {
+    let userEnteredAdd = transferAddress.current.value;
+    let e = myEdition;
     try {
-      let web3 = window.web3;
-      let contractOf = new web3.eth.Contract(
-        berryClubContractAbi,
-        berryClubCntractAddress
-      );
+      if (parseInt(userEnteredAdd.length) > 0) {
+        let d = items.filter((e) => e.edition == myEdition);
+        let web3 = window.web3;
+        let contractOf = new web3.eth.Contract(
+          berryClubContractAbi,
+          berryClubCntractAddress
+        );
+        await contractOf.methods
+          .safeTransferFrom(account, userEnteredAdd, myEdition)
+          .send({
+            from: account,
+          });
+        toast.success("Transaction Successful!");
+        setModalShow(false);
+        console.log("userEnteredAdd", d);
+        console.log("userEnteredAdd", e);
+      } else {
+        toast.info("Address field cannot be empty");
+      }
     } catch (e) {
-      console.log("Error while Transfer Nft");
+      toast.error("Transaction Failed");
+      console.log("Error while Transfer Nft", e);
     }
   };
 
@@ -323,6 +351,13 @@ const Gallery = () => {
     let d = items.filter((e) => e.edition == value);
     setFilterItems(d);
   };
+  const handleModal = (id) => {
+    let d = items.filter((e) => e.edition == id);
+    setModalImage(d);
+    setMyEdition(id);
+    setModalShow(true);
+    console.log("Id in handle", id);
+  };
 
   useEffect(() => {
     getMyNfts();
@@ -331,8 +366,76 @@ const Gallery = () => {
   return (
     <>
       <section id="gallery">
+        {modalShow ? (
+          <Modal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+          >
+            <Modal.Body
+              className="modal-img"
+              style={{
+                background: "rgb(12,30,37)",
+                border: "3px dashed #2ADEEA",
+              }}
+            >
+              <div className="staking " id="presale">
+                <div className="imgArea  d-flex justify-content-center">
+                  <img className="stakingTop-image" src={containerImage}></img>
+                  <span className="imgArea-text">Tranfer Nft</span>
+                </div>
+                <div className=" d-flex justify-content-end mb-4">
+                  <div className="col-12 d-flex justify-content-end">
+                    <IoMdClose
+                      onClick={() => setModalShow(false)}
+                      size={28}
+                      style={{ color: "white", cursor: "pointer" }}
+                    />
+                  </div>
+                </div>
+                <div className="row d-flex justify-content-center flex-wrap flex-row mt-2 ">
+                  {modalImage.map((post) => {
+                    console.log("post in modal = ", post.image);
+                    return (
+                      <>
+                        <img
+                          src={post.image}
+                          className=" m-1 mintImage"
+                          alt="..."
+                        />
+                      </>
+                    );
+                  })}
+                </div>
+                <div className="row d-flex justify-content-center">
+                  <div className="col-md-5 d-flex justify-content-center align-items-center mt-4">
+                    <label style={{ color: "white" }}>To</label>&nbsp;&nbsp;
+                    <input
+                      ref={transferAddress}
+                      className="form-control"
+                      style={{ backgroundColor: "black", color: "#fff" }}
+                    />
+                  </div>
+                </div>
+                <div className="d-flex justify-content-center  mt-2 mb-2">
+                  <button
+                    onClick={() => transferNft()}
+                    className="btn  btnStakePage"
+                    size="sm"
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>
+            </Modal.Body>
+          </Modal>
+        ) : (
+          <></>
+        )}
         <div className="container">
-          <div className="section-title text-center">
+          <div className="section-title text-center text-white">
             <h2>GALLERY</h2>
           </div>
           <div className="galler-section">
@@ -345,7 +448,7 @@ const Gallery = () => {
               </div>
               <div className="img text-center">
                 <img src={ZE} alt="" />
-                <h3 className="pt-3">NO:ZE</h3>
+                <h3 className="pt-3 text-white">NO:ZE</h3>
               </div>
               <div className="img">
                 <img src={G3} alt="" />
@@ -530,7 +633,7 @@ const Gallery = () => {
                                       loading="lazy"
                                     />
 
-                                    <h5 className="image-name py-2">
+                                    <h5 className="image-name py-2 text-white">
                                       {post.name}
                                     </h5>
                                   </div>
@@ -575,12 +678,12 @@ const Gallery = () => {
                                 width={"400px"}
                               />
 
-                              <h5 className="image-name py-2">
+                              <h5 className="image-name py-2 text-white">
                                 {post[0].name}
                               </h5>
                               <div className="d-flex justify-content-center  mt-2 mb-2">
                                 <button
-                                  onClick={() => transferNft()}
+                                  onClick={(id) => handleModal(post[0].edition)}
                                   className="btn  btnStakePage"
                                   size="sm"
                                 >

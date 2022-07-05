@@ -7,19 +7,23 @@ import PublicSaleImg from "../media/public-sale.png";
 import Girl from "../media/girl.png";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import Modal from 'react-bootstrap/Modal'
+import Data from "./metadata.json";
+
+import Modal from "react-bootstrap/Modal";
 import {
   berryClubCntractAddress,
   berryClubContractAbi,
 } from "../Component/Utils/BerryClub";
 import { loadWeb3 } from "../Component/Api/api";
-import g1 from "../media/g-1.png"
 const PublicSale = () => {
   let navigate = useNavigate();
-  const [mintAmount, setMintAmount] = useState(1);
+  const [mintAmount, setMintAmount] = useState(10);
+  let [items, setItems] = useState(Data);
+
   const [account, setAccount] = useState("Connect Wallet");
   const [publicSalePrice, setPublicSalePrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [newMintedIds, setNewMintedIds] = useState([]);
   //   const [userBalance, setUserBalance] = useState(0);
   const [modalShow, setModalShow] = useState(false);
   const getAccount = async () => {
@@ -39,6 +43,34 @@ const PublicSale = () => {
       setTotalPrice(publicPrice);
     } catch (e) {
       console.log("Error in setting total amount");
+    }
+  };
+
+  const getModalImages = async () => {
+    setModalShow(true);
+    try {
+      let web3 = window.web3;
+      let contractOf = new web3.eth.Contract(
+        berryClubContractAbi,
+        berryClubCntractAddress
+      );
+      let dummyArray = [];
+      let totaNftIds = await contractOf.methods.walletOfOwner(account).call();
+      console.log("totaNftIds", totaNftIds);
+      console.log("totaNftIds length", totaNftIds.length);
+
+      let previous = parseInt(totaNftIds.length) - mintAmount;
+      // console.log("previous", previous);
+
+      for (let i = previous; i < totaNftIds.length; i++) {
+        console.log("i==", totaNftIds[i]);
+        let d = items.filter((e) => e.edition == totaNftIds[i]);
+        console.log("d", d);
+        dummyArray = [...dummyArray, d];
+      }
+      setNewMintedIds(dummyArray);
+    } catch (e) {
+      console.log("Error while loadig modal Images");
     }
   };
   const publicMint = async () => {
@@ -65,12 +97,13 @@ const PublicSale = () => {
 
         if (checkBool) {
           if (parseFloat(userBalance) > parseFloat(totalprice)) {
-            await contractOf.methods.mint(mintAmount).send({
-              value: totalprice.toString(),
-              from: account,
-            });
+            // await contractOf.methods.mint(mintAmount).send({
+            //   value: totalprice.toString(),
+            //   from: account,
+            // });
+            getModalImages();
             toast.success("Transaction Successfull");
-            navigate("/gallery");
+            // navigate("/gallery");
           } else {
             toast.info("Insufficient Balance!");
           }
@@ -162,8 +195,8 @@ const PublicSale = () => {
                         <p
                           //   type="text"
                           className="form-control number mt-3"
-                        //   placeholder="1"
-                        //   value="1"
+                          //   placeholder="1"
+                          //   value="1"
                         >
                           {mintAmount}
                         </p>
@@ -222,12 +255,12 @@ const PublicSale = () => {
                               {account === "No Wallet"
                                 ? "Connect"
                                 : account === "Connect Wallet"
-                                  ? "Connect"
-                                  : account === "Wrong Network"
-                                    ? account
-                                    : account.substring(0, 4) +
-                                    "..." +
-                                    account.substring(account.length - 4)}
+                                ? "Connect"
+                                : account === "Wrong Network"
+                                ? account
+                                : account.substring(0, 4) +
+                                  "..." +
+                                  account.substring(account.length - 4)}
                             </button>
                           </div>
                         </div>
@@ -237,8 +270,8 @@ const PublicSale = () => {
                               className="btn btn-Mint"
                               size="lg"
                               onClick={() => {
-                                // publicMint()
-                                setModalShow(true)
+                                publicMint();
+                                // setModalShow(true);
                               }}
                             >
                               Mint
@@ -254,23 +287,34 @@ const PublicSale = () => {
                   </div>
                 </div>
               </div>
-              {
-                modalShow ? (<Modal
+              {modalShow ? (
+                <Modal
                   show={modalShow}
                   onHide={() => setModalShow(false)}
                   size="lg"
                   aria-labelledby="contained-modal-title-vcenter"
                   centered
                 >
-
-                  <Modal.Body className="modal-img" style={{ background: "rgb(12,30,37)", border: "3px dashed #2ADEEA" }}>
-                    <div className="staking d-flex justify-content-center " id="presale">
-                      <div className="imgArea ">
-                        <img className="stakingTop-image" src={containerImage}></img>
-                        <span className="imgArea-text">Mint</span>
+                  <Modal.Body
+                    className="modal-img"
+                    style={{
+                      background: "rgb(12,30,37)",
+                      border: "3px dashed #2ADEEA",
+                    }}
+                  >
+                    <div
+                      className="staking d-flex justify-content-center "
+                      id="presale"
+                    >
+                      <div className="imgArea  d-flex justify-content-center">
+                        <img
+                          className="stakingTop-image"
+                          src={containerImage}
+                        ></img>
+                        <span className="imgArea-text">Congratulations</span>
                       </div>
-                      <div className=' d-flex justify-content-end mb-4'>
-                        <div className='col-12 d-flex justify-content-end'>
+                      <div className=" d-flex justify-content-end mb-4">
+                        <div className="col-12 d-flex justify-content-end">
                           <IoMdClose
                             onClick={() => setModalShow(false)}
                             size={28}
@@ -278,53 +322,29 @@ const PublicSale = () => {
                           />
                         </div>
                       </div>
-                      <div className=" container-staking-outside ">
-                        <div className="container-fluid container-staking m-1 p-lg-5 p-md-3">
-                          <div className="row ">
-                            <div className="col-12 d-flex justify-content-end">
-                              <button
-                                className="btnConnectInPresale  mt-1 mb-1"
-                              // onClick={onConnectAccount}
-                              >
-                                Connect
-                                {/* {acc === "No Wallet"
-                  ? t("NoWallet")
-                  : acc === "Connect Wallet"
-                  ? t("Connect")
-                  : acc === "Wrong Network"
-                  ? t("WrongNetwork")
-                  : acc.substring(0, 4) + "..." + acc.substring(acc.length - 4)} */}
-                              </button>
+                      <div className="row d-flex justify-content-center flex-wrap flex-row mt-5 ">
+                        {newMintedIds.map((post) => {
+                          console.log("newMintedIds", post[0].name);
+                          return (
+                            <div className="col-4">
+                              <img
+                                src={post[0].image}
+                                className=" m-1 mintImage"
+                                alt="..."
+                              />
+                              <h5 className="image-name py-2 text-white">
+                                {post[0].name}
+                              </h5>
                             </div>
-                          </div>
-                          <div className=" mt-5 d-flex justify-content-center flex-row   g-0" >
-                            <div className="col-lg-12 col-md-12 col-sm-12  pt-3">
-                              {/* <div className="mintCard"> */}
-                                <img src={g1} className="mintImage" alt="..." />
-                                <img src={g1} className="mintImage" alt="..." />
-                                <img src={g1} className="mintImage" alt="..." />
-                                <img src={g1} className="mintImage" alt="..." />
-                                <img src={g1} className="mintImage" alt="..." />
-                                <img src={g1} className="mintImage" alt="..." />
-                                <img src={g1} className="mintImage" alt="..." />
-                                <img src={g1} className="mintImage" alt="..." />
-                                <img src={g1} className="mintImage" alt="..." />
-                                <img src={g1} className="mintImage" alt="..." />
-
-                              {/* </div> */}
-                            </div>
-
-                          </div>
-                        </div>
+                          );
+                        })}
                       </div>
-
                     </div>
-
                   </Modal.Body>
-                </Modal>) : (
-                  <></>
-                )
-              }
+                </Modal>
+              ) : (
+                <></>
+              )}
             </div>
             {/* <div className="col-md-4 text-center">
                         <div className="ps-mint-box">

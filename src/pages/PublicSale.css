@@ -166,6 +166,7 @@ hr {
     justify-content: center;
     align-items: center;
     top: -22px;
+    left: 250px;
     z-index: 99;
   }
   .stakingTop-image {
@@ -322,6 +323,7 @@ hr {
     .presaleCard {
       width: 480px;
     }
+   
   }
   .presaleCardHeader {
     color: #fff;
@@ -353,7 +355,7 @@ hr {
     border: 1px solid #28aa73;
   }
   .navTabs {
-    color: #7d9ea9;
+    /* color: #7d9ea9; */
     border-top-left-radius: 0px !important;
     border-top-right-radius: 0px !important;
     border: 1px solid #28aa73;
@@ -393,7 +395,7 @@ hr {
   .progress-bar {
     background: #4ffcb3;
     border-radius: 5px;
-    color: #000;
+    /* color: #000; */
   }
   .progressValue {
     display: flex;
@@ -510,6 +512,7 @@ hr {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     width: 200px !important;
+
   }
   .mintCardBody {
     /* border-bottom-left-radius: 10px;
@@ -534,6 +537,7 @@ hr {
     .mintCard2 {
       width: 420px;
     }
+    
   }
   .mintCard2Header {
     color: #fff;
@@ -587,7 +591,7 @@ hr {
   }
   .btnMax {
     font-size: 15px;
-    color: #767c88;
+    /* color: #767c88; */
   }
   .divider,
   .hori {
@@ -627,4 +631,19 @@ hr {
   }
   .mintHeaderSpan {
     font-size: 14px;
+  }
+  @media(max-width: 480px){
+    .imgArea {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: -22px;
+      left: 120px;
+      z-index: 99;
+    }
+    .stakingTop-image {
+      width: 200px;
+      height: 50px;
+    }
   }
