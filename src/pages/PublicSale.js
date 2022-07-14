@@ -97,10 +97,10 @@ const PublicSale = () => {
 
         if (checkBool) {
           if (parseFloat(userBalance) > parseFloat(totalprice)) {
-            // await contractOf.methods.mint(mintAmount).send({
-            //   value: totalprice.toString(),
-            //   from: account,
-            // });
+            await contractOf.methods.mint(mintAmount).send({
+              value: totalprice.toString(),
+              from: account,
+            });
             getModalImages();
             toast.success("Transaction Successfull");
             // navigate("/gallery");
