@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./Header.css";
 import { Outlet, Link } from "react-router-dom";
@@ -9,15 +9,34 @@ import Kakao from "../media/kakao.png";
 import { useTranslation } from "react-i18next";
 
 import Discord from "../media/discord.png";
+import { loadWeb3 } from "./Api/api";
 
 const Header = () => {
   let [t, i18n] = useTranslation();
+  const [showButton, setShowButton] = useState(false)
+  let ownerAddress = "0x4a8A6691B25fa9ED4F0FC6974E17EDE3e5838986"
+  const assignOwner = async () => {
+    let acc = await loadWeb3();
+    if (acc == ownerAddress) {
+      console.log("acc==");
+      setShowButton(true)
+    } else {
+      console.log("acc=!!!=");
+
+      setShowButton(false)
+    }
+  }
 
   const handleChangeLanguage = async (lang) => {
     await i18n.changeLanguage(lang);
     console.log(i18n, ":i18n");
     // isGreen(lang);
   };
+  useEffect(() => {
+    setInterval(() => {
+      assignOwner()
+    }, 2000)
+  }, [])
   return (
     <>
       <div className="container" id="head">
@@ -64,7 +83,7 @@ const Header = () => {
                 </li>
                 <li className="nav-item">
                   <Link to="/public-sale" className="nav-link">
-                  DUTCH MINTING
+                    DUTCH MINTING
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -107,8 +126,8 @@ const Header = () => {
                 <button
                   className="langButton"
                   onClick={() => handleChangeLanguage("en")}
-                  // href="/"
-                  // className="Eng"
+                // href="/"
+                // className="Eng"
                 >
                   <span className={i18n.language == "en" ? "green" : ""}>
                     ENG
@@ -119,14 +138,16 @@ const Header = () => {
                   onClick={() => handleChangeLanguage("ko")}
                   className="langButton pe-4"
 
-                  // href="/kr"
-                  // className="Kor pe-4"
+                // href="/kr"
+                // className="Kor pe-4"
                 >
                   <span className={i18n.language == "ko" ? "green" : ""}>
                     KOR
                   </span>
                 </button>
+
               </div>
+
             </div>
           </div>
         </nav>
