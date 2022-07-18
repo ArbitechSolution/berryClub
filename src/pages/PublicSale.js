@@ -4,12 +4,22 @@ import containerImage from "../media/Group 48.png";
 import "./PublicSale.css";
 import Footer from "../Component/Footer";
 import PublicSaleImg from "../media/public-sale.png";
+import DUTCHMINTINGSALES from "../media/DUTCH MINTING SALES.png"
 import Girl from "../media/girl.png";
+import 소개페이지이미지 from "../media/소개페이지 이미지 3.png"
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Data from "./metadata.json";
-
+import Group795 from "../media/Group 795.png"
+import Group796 from "../media/Group 796.png"
 import Modal from "react-bootstrap/Modal";
+import Group797 from "../media/Group 797.png"
+import Group798 from "../media/Group 798.png"
+import Rectangle42 from "../media/Rectangle 42.png"
+import Rectangle43 from "../media/Rectangle 43-4.png"
+import Rectangle45 from "../media/Rectangle 45.png"
+import Rectangle46 from "../media/Rectangle 46.png"
+import girls950 from "../media/950 1.png"
 import {
   berryClubCntractAddress,
   berryClubContractAbi,
@@ -171,8 +181,8 @@ const PublicSale = () => {
         <div className="container">
           <div className="row">
             <div className="section-title text-center">
-              <h2>MINTING</h2>
-              <img src={PublicSaleImg} alt="" className="pt-3" />
+              <h2 className="text-white">MINTING</h2>
+              <img src={DUTCHMINTINGSALES} alt="" className="pt-3 DUTCH-image" />
             </div>
           </div>
           <div className="row d-flex justify-content-center mt-5">
@@ -180,7 +190,7 @@ const PublicSale = () => {
               <div className="row">
                 <div className="col-md-4 text-center">
                   <div className="ps-mint-box">
-                    <img src={Girl} alt="" width="400px" />
+                    <img src={소개페이지이미지} alt="" className="소개페이지이미지img" />
                     <div className="row">
                       <div className="input-group  mt-4 col-12">
                         <button
@@ -195,8 +205,8 @@ const PublicSale = () => {
                         <p
                           //   type="text"
                           className="form-control number mt-3"
-                          //   placeholder="1"
-                          //   value="1"
+                        //   placeholder="1"
+                        //   value="1"
                         >
                           {mintAmount}
                         </p>
@@ -210,31 +220,42 @@ const PublicSale = () => {
                           +
                         </button>
                         <span className="input-group-text form-control">
-                          10 max
+                          3 max
                         </span>
                       </div>
                       <hr className="my-3" />
                     </div>
 
-                    <div className="total text-white">
+                    <div className="total text-white mt-3">
                       <span className="text">Total</span>
-                      <span className="value">{totalPrice} ETH</span>
+                      <span className="value">{totalPrice} BCB</span>
                     </div>
                   </div>
                 </div>
                 <div className="col-md-8  col-info">
                   <div className="ps-info-box">
                     <div className="box-head">
-                      <span className="text fw-bold">Price per Card</span>
-                      <span className="value" style={{ fontWeight: "700" }}>
-                        {publicSalePrice} ETH
+                      <span className="text-white fw-bold">Price per Card</span>
+                      <span className="value text-white" style={{ fontWeight: "700" }}>
+                        {publicSalePrice} BCB
                       </span>
                     </div>
 
                     <div className="box-body text-center">
                       <div className="content text-white">
                         <h4>Join the Minting right now!</h4>
-                        <p>
+                        <p className="dutch-p">Sale will be dutch auction in which only first 2,000 NFTs
+                          will be minted - in dutch auction sale users can only
+                          mint using the BCB token collected as reward by
+                          staking the Berry Girl NFTs (call these minted NFTs
+                          as BG NFT) - the dutch auction sale will start from
+                          5,000 token per mint price and every 15 minutes the
+                          price for mint will go down 50 coins - the sale will
+                          end if all the 1,000 NFTs are sold or 24 hours are
+                          finished for the sale - if either of the condition is
+                          met then the sale will turn off.
+                        </p>
+                        {/* <p>
                           You can participate in Minting by connecting wallet
                           and pressing Mint button.
                         </p>
@@ -242,7 +263,7 @@ const PublicSale = () => {
                           The number of transitions per person is limited to 10,
                           and sanctions can be imposed without additional
                           guidance if bot actions are detected.
-                        </p>
+                        </p> */}
                       </div>
                       <div className="row">
                         <div className="col-md-7 col-12 mt-2">
@@ -255,12 +276,12 @@ const PublicSale = () => {
                               {account === "No Wallet"
                                 ? "Connect"
                                 : account === "Connect Wallet"
-                                ? "Connect"
-                                : account === "Wrong Network"
-                                ? account
-                                : account.substring(0, 4) +
-                                  "..." +
-                                  account.substring(account.length - 4)}
+                                  ? "Connect"
+                                  : account === "Wrong Network"
+                                    ? account
+                                    : account.substring(0, 4) +
+                                    "..." +
+                                    account.substring(account.length - 4)}
                             </button>
                           </div>
                         </div>
@@ -270,8 +291,8 @@ const PublicSale = () => {
                               className="btn btn-Mint"
                               size="lg"
                               onClick={() => {
-                                publicMint();
-                                // setModalShow(true);
+                                // publicMint();
+                                setModalShow(true);
                               }}
                             >
                               Mint
@@ -299,22 +320,24 @@ const PublicSale = () => {
                     className="modal-img"
                     style={{
                       background: "rgb(12,30,37)",
-                      border: "3px dashed #2ADEEA",
+                      border: "3px solid #2ADEEA",
+                      borderRadius: "5px",
+                      position: "relative"
                     }}
                   >
+                    <img src={Group795} className="image1"/>
+                    <img src={Group796} className="image2"/>
+                    <img src={Group797} className="image3"/>
+                    <img src={Group798} className="image4"/>
+                    <img src={Rectangle42} className="image5"/>
+                    <img src={Rectangle43} className="image6"/>
                     <div
-                      className="staking d-flex justify-content-center "
+                      className="row staking d-flex justify-content-center flex-wrap flex-row"
                       id="presale"
+
                     >
-                      <div className="imgArea  d-flex justify-content-center">
-                        <img
-                          className="stakingTop-image"
-                          src={containerImage}
-                        ></img>
-                        <span className="imgArea-text">Congratulations</span>
-                      </div>
-                      <div className=" d-flex justify-content-end mb-4">
-                        <div className="col-12 d-flex justify-content-end">
+                      <div className="row d-flex justify-content-center">
+                        <div className="col-11 d-flex justify-content-end">
                           <IoMdClose
                             onClick={() => setModalShow(false)}
                             size={28}
@@ -322,8 +345,46 @@ const PublicSale = () => {
                           />
                         </div>
                       </div>
-                      <div className="row d-flex justify-content-center flex-wrap flex-row mt-5 ">
-                        {newMintedIds.map((post) => {
+                      <div className="row d-flex justify-content-center">
+
+                        <div className="col-md-6 d-flex text-center justify-content-center align-items-center">
+                          <img src={Rectangle45} className="mintImage1" />
+                          <img src={Rectangle46} className="mintImage2" />
+                          <span className="mintImage3">CONGRATULATION!</span>
+                        </div>
+                      </div>
+                      <div className="row d-flex justify-content-center text-center  mt-4 ">
+                        <span className="dutch-span1">You got a Berry Girl card now !</span>
+
+                        <div className="col-8 dutch-img2 d-flex justify-content-center align-items-center mt-4" >
+                          <img src={girls950} className="dutch-img23" />
+                        </div>
+                        <div className="row d-flex justify-content-center mt-4">
+                          <div className="col-3">
+                            <div className="d-grid gap-2">
+                              <button className="btn btn-dutch" size="lg">
+                              Staking
+                              </button>
+                            </div>
+                          </div>
+                          <div className="col-3">
+                            <div className="d-grid gap-2">
+                              <button className="btn btn-dutch" size="lg">
+                              Breed
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row d-flex justify-content-center mt-4 mb-5">
+                        <div className="col-6">
+                            <div className="d-grid gap-2">
+                              <button className="btn btn-dutch1" size="lg">
+                              Do it later
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                        {/* {newMintedIds.map((post) => {
                           console.log("newMintedIds", post[0].name);
                           return (
                             <div className="col-4">
@@ -337,7 +398,7 @@ const PublicSale = () => {
                               </h5>
                             </div>
                           );
-                        })}
+                        })} */}
                       </div>
                     </div>
                   </Modal.Body>

@@ -5,7 +5,7 @@
   padding: 120px 0px 60px 0px;
 }
 #public-sale .section-title img {
-  max-width: 25%;
+  max-width: 35%;
 }
 
 #public-sale .ps-box {
@@ -15,7 +15,7 @@
 }
 
 #public-sale .ps-mint-box img {
-  max-width: 95%;
+  max-width: 111%;
 }
 
 #public-sale .ps-mint-box {
@@ -151,15 +151,52 @@ hr {
   color: #fff;
   padding: 1px;
 }
+/* .소개페이지이미지img{
+  width: 900px !important;
+  border: 2px solid red
+} */
 
+.dutch-p{
+  font-size: 14.1px !important;
+}
 
+.image1{
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 100px;
+}
+.image2{
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 100px;
+}
+.image3{
+  position: absolute;
+  bottom: -72px;
+  right: -478px;
+  width: 100px;
+}
+.image4{
+  position: absolute;
+  bottom: -72px;
+  left: -320px;
+  width: 100px;
+}
+.image5{
+  position: absolute; 
+  width: 200px;
+  top: -63px;
+  left: -110px;
+}
+.image6{
+  position: absolute; 
+  width: 200px;
+  bottom: -73px;
+  left: 290px;
 
-
-
-
-
-
-
+}
 .imgArea {
     position: absolute;
     display: flex;
@@ -173,7 +210,62 @@ hr {
     width: 300px;
     height: 50px;
   } 
-
+  .mintImage1 {
+    position: relative;
+    width: 350px;
+  }
+  
+  .mintImage2 {
+    position: absolute;
+    width: 302px;
+  }
+  .mintImage3{
+    position: absolute;
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 100%;
+color: white;
+  }
+  .dutch-span1{
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 100%;
+color: white;
+  }
+  .dutch-img2{
+    background-image: url("../media/4421 1.png");
+    min-height: 300px; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  /* background-size: cover;  */
+  }
+  .dutch-img23{
+    width: 250px;
+  }
+  .btn-dutch{
+    background: linear-gradient(180deg, #3A6368 0%, #45C3AF 55.21%, #447A7C 100%);
+mix-blend-mode: normal;
+font-family: 'SF UI Text';
+font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 100%;
+color: white;
+  }
+  .btn-dutch1{
+    background: linear-gradient(180deg, #484848 0%, #6D6D6D 51.56%, #484848 100%);
+mix-blend-mode: normal;
+font-family: 'SF UI Text';
+font-style: normal;
+font-weight: 600;
+font-size: 24px;
+line-height: 100%;
+color: white;
+  }
 #presale{
     
 }

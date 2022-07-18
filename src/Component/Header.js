@@ -64,7 +64,7 @@ const Header = () => {
                 </li>
                 <li className="nav-item">
                   <Link to="/public-sale" className="nav-link">
-                    PUBLIC SALE
+                  DUTCH MINTING
                   </Link>
                 </li>
                 <li className="nav-item">

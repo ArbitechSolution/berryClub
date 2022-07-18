@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./Minting.css";
 import Footer from "../Component/Footer";
 import PrivateSale from "../media/private-sale.png";
-import FREEMINTING from "../media/FREE MINTING.PNG"
+import FREEMINTING from "../media/FREE MINTING.png"
 import { toast } from "react-toastify";
 import { whiteListingArray } from "./whiteList";
 import Girl from "../media/girl.png";
@@ -119,8 +119,8 @@ const Minting = () => {
             <div className="col-12 text-center">
               <div className="ps-info-box">
                 <img src={Girl} alt="" />
-                <h4>{t("mintPara1")}</h4>
-                <p>
+                <h4 className="text-white">{t("mintPara1")}</h4>
+                {/* <p>
                   {t("mintPara2")}
                   <a
                     className="anchorTags"
@@ -129,7 +129,7 @@ const Minting = () => {
                   >
                     {t("mintPara3")}
                   </a>
-                </p>
+                </p> */}
               </div>
               <button onClick={() => mintNfts()} className="mint-btn">
                 MINT
