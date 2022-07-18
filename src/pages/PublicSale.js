@@ -322,15 +322,17 @@ const PublicSale = () => {
                       background: "rgb(12,30,37)",
                       border: "3px solid #2ADEEA",
                       borderRadius: "5px",
-                      position: "relative"
+                      position: "relative",
+                      // Width: "900px"
+
                     }}
                   >
-                    <img src={Group795} className="image1"/>
-                    <img src={Group796} className="image2"/>
-                    <img src={Group797} className="image3"/>
-                    <img src={Group798} className="image4"/>
-                    <img src={Rectangle42} className="image5"/>
-                    <img src={Rectangle43} className="image6"/>
+                    <img src={Group795} className="image1" />
+                    <img src={Group796} className="image2" />
+                    <img src={Group797} className="image3" />
+                    <img src={Group798} className="image4" />
+                    <img src={Rectangle42} className="image5" />
+                    <img src={Rectangle43} className="image6" />
                     <div
                       className="row staking d-flex justify-content-center flex-wrap flex-row"
                       id="presale"
@@ -353,37 +355,140 @@ const PublicSale = () => {
                           <span className="mintImage3">CONGRATULATION!</span>
                         </div>
                       </div>
-                      <div className="row d-flex justify-content-center text-center  mt-4 ">
+                      <div className="row d-flex justify-content-center text-center  mt-4 " style={{border:"2px solid red"}}>
                         <span className="dutch-span1">You got a Berry Girl card now !</span>
+                        {/* <div className="col-md-4 col-11">
+                          <div className="row">
+                          <div className="col-12 dutch-img2 d-flex justify-content-center align-items-center mt-4" >
+                            <img src={girls950} className="dutch-img23" />
+                          </div>
+                          <div className="row d-flex justify-content-center mt-4" sty>
+                            <div className="col-md-6 col-11 mt-2">
+                              <div className="d-grid gap-2">
+                                <button className="btn btn-dutch" size="lg">
+                                  Staking
+                                </button>
+                              </div>
+                            </div>
+                            <div className="col-md-6 col-11 mt-2">
+                              <div className="d-grid gap-2">
+                                <button className="btn btn-dutch" size="lg">
+                                  Breed
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row d-flex justify-content-center mt-4 mb-5">
+                            <div className="col-md-12 col-11">
+                              <div className="d-grid gap-2">
+                                <button className="btn btn-dutch1" size="lg">
+                                  Do it later
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
 
-                        <div className="col-8 dutch-img2 d-flex justify-content-center align-items-center mt-4" >
-                          <img src={girls950} className="dutch-img23" />
-                        </div>
-                        <div className="row d-flex justify-content-center mt-4">
-                          <div className="col-3">
-                            <div className="d-grid gap-2">
-                              <button className="btn btn-dutch" size="lg">
-                              Staking
-                              </button>
+
+
+                        <div className="col-md-4 col-11">
+                          <div className="row">
+                          <div className="col-12 dutch-img2 d-flex justify-content-center align-items-center mt-4" >
+                            <img src={girls950} className="dutch-img23" />
+                          </div>
+                          <div className="row d-flex justify-content-center mt-4" sty>
+                            <div className="col-md-6 col-11 mt-2">
+                              <div className="d-grid gap-2">
+                                <button className="btn btn-dutch" size="lg">
+                                  Staking
+                                </button>
+                              </div>
+                            </div>
+                            <div className="col-md-6 col-11 mt-2">
+                              <div className="d-grid gap-2">
+                                <button className="btn btn-dutch" size="lg">
+                                  Breed
+                                </button>
+                              </div>
                             </div>
                           </div>
-                          <div className="col-3">
-                            <div className="d-grid gap-2">
-                              <button className="btn btn-dutch" size="lg">
-                              Breed
-                              </button>
+                          <div className="row d-flex justify-content-center mt-4 mb-5">
+                            <div className="col-md-12 col-11">
+                              <div className="d-grid gap-2">
+                                <button className="btn btn-dutch1" size="lg">
+                                  Do it later
+                                </button>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="row d-flex justify-content-center mt-4 mb-5">
-                        <div className="col-6">
-                            <div className="d-grid gap-2">
-                              <button className="btn btn-dutch1" size="lg">
-                              Do it later
-                              </button>
-                            </div>
                           </div>
                         </div>
+
+
+
+
+                        <div className="col-md-4 col-11">
+                          <div className="row">
+                          <div className="col-12 dutch-img2 d-flex justify-content-center align-items-center mt-4" >
+                            <img src={girls950} className="dutch-img23" />
+                          </div>
+                          <div className="row d-flex justify-content-center mt-4" sty>
+                            <div className="col-md-6 col-11 mt-2">
+                              <div className="d-grid gap-2">
+                                <button className="btn btn-dutch" size="lg">
+                                  Staking
+                                </button>
+                              </div>
+                            </div>
+                            <div className="col-md-6 col-11 mt-2">
+                              <div className="d-grid gap-2">
+                                <button className="btn btn-dutch" size="lg">
+                                  Breed
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row d-flex justify-content-center mt-4 mb-5">
+                            <div className="col-md-12 col-11">
+                              <div className="d-grid gap-2">
+                                <button className="btn btn-dutch1" size="lg">
+                                  Do it later
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                        </div> */}
+                          <div className="col-6 dutch-img2 d-flex justify-content-center align-items-center mt-4" >
+                            <img src={girls950} className="dutch-img23" />
+                          </div>
+                          <div className="row d-flex justify-content-center mt-4">
+                            <div className="col-md-3 col-11 mt-2">
+                              <div className="d-grid gap-2">
+                                <button className="btn btn-dutch" size="lg">
+                                  Staking
+                                </button>
+                              </div>
+                            </div>
+                            <div className="col-md-3 col-11 mt-2">
+                              <div className="d-grid gap-2">
+                                <button className="btn btn-dutch" size="lg">
+                                  Breed
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="row d-flex justify-content-center mt-4 mb-5">
+                            <div className="col-md-6 col-11">
+                              <div className="d-grid gap-2">
+                                <button className="btn btn-dutch1" size="lg">
+                                  Do it later
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        {/*  */}
                         {/* {newMintedIds.map((post) => {
                           console.log("newMintedIds", post[0].name);
                           return (

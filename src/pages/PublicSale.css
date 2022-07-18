@@ -162,38 +162,38 @@ hr {
 
 .image1{
   position: absolute;
-  top: -2px;
-  left: -2px;
+  top: -3px;
+  left: -3px;
   width: 100px;
 }
 .image2{
   position: absolute;
-  top: -2px;
-  right: -2px;
+  top: -3px;
+  right: -3px;
   width: 100px;
 }
 .image3{
   position: absolute;
-  bottom: -72px;
-  right: -478px;
+  bottom: -3px;
+  right: -3px;
   width: 100px;
 }
 .image4{
   position: absolute;
-  bottom: -72px;
-  left: -320px;
+  bottom: -3px;
+  left: -3px;
   width: 100px;
 }
 .image5{
   position: absolute; 
   width: 200px;
-  top: -63px;
-  left: -110px;
+  top: -3px;
+  left: 300px;
 }
 .image6{
   position: absolute; 
   width: 200px;
-  bottom: -73px;
+  bottom: -3px;
   left: 290px;
 
 }
@@ -238,13 +238,13 @@ color: white;
   }
   .dutch-img2{
     background-image: url("../media/4421 1.png");
-    min-height: 300px; 
+    min-height: 350px; 
   background-position: center; 
   background-repeat: no-repeat; 
-  /* background-size: cover;  */
+  background-size: cover; 
   }
   .dutch-img23{
-    width: 250px;
+    width: 230px;
   }
   .btn-dutch{
     background: linear-gradient(180deg, #3A6368 0%, #45C3AF 55.21%, #447A7C 100%);
@@ -320,6 +320,25 @@ color: white;
   @media (max-width: 676.98px) {
     .textMyCrazy {
       font-size: 22px;
+    }
+    .image1{
+      display: none;
+    }
+    .image2{
+      display: none;
+    }
+    .image3{
+      display: none;
+    }
+    .image4{
+      display: none;
+    }
+    .image5{
+      display: none;
+    }
+    .image6{
+      display: none;
+    
     }
   }
   .card-img-top {
