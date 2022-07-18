@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./Minting.css";
 import Footer from "../Component/Footer";
 import PrivateSale from "../media/private-sale.png";
+import FREEMINTING from "../media/FREE MINTING.PNG"
 import { toast } from "react-toastify";
 import { whiteListingArray } from "./whiteList";
 import Girl from "../media/girl.png";
@@ -109,8 +110,9 @@ const Minting = () => {
         <div className="container">
           <div className="row">
             <div className="section-title text-center">
-              <h2>MINTING</h2>
-              <img src={PrivateSale} alt="" className="pt-3" />
+              <h2 className="text-white">MINTING</h2>
+
+              <img src={FREEMINTING} alt="" className="pt-3" />
             </div>
           </div>
           <div className="row">
