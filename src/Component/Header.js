@@ -41,7 +41,7 @@ const Header = () => {
     <>
       <div className="container" id="head">
         <nav className="navbar navbar-expand-lg navbar-light">
-          <div className="container-fluid d-inline d-md-flex">
+          <div className="container d-md-flex" >
             <Link to="/" className="navbar-brand">
               <img src={Logo} className="w-75" alt="" />
             </Link>
@@ -59,8 +59,9 @@ const Header = () => {
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
+              
             >
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center">
+              <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center" >
                 <li className="nav-item">
                   <Link
                     to="/"
@@ -97,7 +98,7 @@ const Header = () => {
                   </a>
                 </li>
               </ul>
-              <div className="social-links">
+              <div className="social-links" >
                 <a
                   href="#link"
                   target="_blank"
@@ -147,7 +148,9 @@ const Header = () => {
                 </button>
 
               </div>
-
+              <button className="btn mint-btns1">
+                Connect
+              </button>
             </div>
           </div>
         </nav>

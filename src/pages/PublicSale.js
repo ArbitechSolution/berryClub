@@ -355,7 +355,7 @@ const PublicSale = () => {
                           <span className="mintImage3">CONGRATULATION!</span>
                         </div>
                       </div>
-                      <div className="row d-flex justify-content-center text-center  mt-4 " style={{border:"2px solid red"}}>
+                      <div className="row d-flex justify-content-center text-center mt-4 " style={{border:"2px solid red"}}>
                         <span className="dutch-span1">You got a Berry Girl card now !</span>
                         {/* <div className="col-md-4 col-11">
                           <div className="row">
