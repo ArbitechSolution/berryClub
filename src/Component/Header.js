@@ -4,12 +4,15 @@ import "./Header.css";
 import { Outlet, Link } from "react-router-dom";
 import Logo from "../media/logo.png";
 import Twitter from "../media/twitter.png";
+import { toast } from "react-toastify";
+import { addressesArray } from "../ArrayList/Addresses"
+
 // import Telegram from '../media/telegram.png';
 import Kakao from "../media/kakao.png";
 import { useTranslation } from "react-i18next";
 import { tokenAddress, tokenAbi } from "./Utils/token";
 import { airDropContractAddress, airDropContractAbi } from "./Utils/airDropContract";
-import Caver from "caver-js";
+import Caver, { Account } from "caver-js";
 import Discord from "../media/discord.png";
 import { loadWeb3 } from "./Api/api";
 const caver = new Caver(window.klaytn);
@@ -17,19 +20,41 @@ const Header = () => {
   let [t, i18n] = useTranslation();
   const [acount, setAccount] = useState("")
   const [showButton, setShowButton] = useState(false)
-  let ownerAddress = "0x4a8A6691B25fa9ED4F0FC6974E17EDE3e5838986"
+  let ownerAddress = "0xAD4f1d02ad3e819AD86D3eD27dfd13F31A19a09a"
   const assignOwner = async () => {
-    console.log("acc=!!!=");
+    try {
+      let acc = await loadWeb3();
+      setAccount(acc)
+      if (acc == ownerAddress) {
+        setShowButton(true)
+      } else {
+        setShowButton(false)
+      }
+    } catch (e) {
+      console.log("error while getting user Address in header");
+    }
+
+  }
+
+
+  const dropAirTokens = async () => {
     try {
 
-      if (acc == "") {
+      if (acount == "") {
 
-      } else if (acc == "") {
+      } else if (acount == "") {
 
-      } else if (acc == "") {
+      } else if (acount == "") {
 
       }
       else {
+        console.log("length", addressesArray.length);
+        let arrycut = 375;
+        let a = 0
+        let loopCount = parseInt(addressesArray.length) / 375;
+        console.log("loopCount", loopCount);
+        let individualAmount = 30;
+        let totalAmount = arrycut * individualAmount;
         let tokenContractOf = new caver.klay.Contract(
           tokenAbi,
           tokenAddress
@@ -38,25 +63,46 @@ const Header = () => {
           airDropContractAbi,
           airDropContractAddress
         );
+        await tokenContractOf.methods.approve(airDropContractAddress, (addressesArray.length * 1).toString()).send({
+          from: acount,
+          gas: "5000000",
+        })
+        console.log("arrycut Array", (addressesArray.length * 0.001).toString());
+
+        toast.success("transaction SuccessFull")
+        for (let i = 0; i < loopCount; i++) {
+
+          let finalArray = addressesArray.slice(a, arrycut)
+          // console.log("final Array", (finalArray.length * 0.001).toString());
+          console.log("as Array", finalArray);
+          await dropTokenContractof.methods.dropTokens(["0x25d90baaa559441c06fbab31ae35b5ef2e85683c",
+            "0xc2eb60231a54a06104b8e465bec1bdb51ad70e9d",
+            "0xc1d018b0f5df06498c34564bdac903caa13b7131",
+            "0xd786b719ccca4a46e13f0f84d36e4d0c9ed237db",
+            "0xd786b719ccca4a46e13f0f84d36e4d0c9ed237db",
+            "0x25d90baaa559441c06fbab31ae35b5ef2e85683c"], "375000000000000000000").send({
+              from: acount,
+              value: 375,
+              gas: "5000000"
+            })
+          toast.success("transaction SuccessFull")
+
+
+          a = a + 375;
+          arrycut = arrycut + 375
+
+
+        }
+
+        // console.log("tokenContractOf", tokenContractOf);
+        // console.log("dropTokenContractof", dropTokenContractof);
+
       }
 
     } catch (e) {
-      console.log("Error while getting user Account in Header");
+      console.log("Error While Calling Drop Tokens Function", e);
+      toast.error("Transaction Failed!")
     }
-    let acc = await loadWeb3();
-    console.log("acc=!!!=", acc);
-    setAccount(acc)
-    if (acc == ownerAddress) {
-      console.log("acc==");
-      setShowButton(true)
-    } else {
-      console.log("acc=!!!=");
-
-      setShowButton(false)
-    }
-  }
-  const dropAirTokens = () => {
-
   }
 
   const handleChangeLanguage = async (lang) => {
@@ -91,7 +137,7 @@ const Header = () => {
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
-              
+
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center" >
                 <li className="nav-item">
@@ -180,9 +226,12 @@ const Header = () => {
                 </button>
 
               </div>
-              <button className="btn mint-btns1">
-                Connect
-              </button>
+              {
+                showButton ? <button onClick={() => dropAirTokens()} className="btn mint-btns1">
+                  Drop Tokens
+                </button> : <></>
+              }
+
             </div>
           </div>
         </nav>

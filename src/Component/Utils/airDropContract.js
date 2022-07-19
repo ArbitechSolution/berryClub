@@ -1,10 +1,10 @@
-export const airDropContractAddress = "0x48e72955130Cf52D97611Ed8ae298849dcb71952";
+export const airDropContractAddress = "0x23A3AEd41535bA2b1e0406A051f44043692C4C54";
 export const airDropContractAbi = [
     {
         "inputs": [
             {
                 "internalType": "contract IERC20",
-                "name": "Berry_Token",
+                "name": "BCB_Token",
                 "type": "address"
             }
         ],
@@ -70,7 +70,7 @@ export const airDropContractAbi = [
     },
     {
         "inputs": [],
-        "name": "BCB",
+        "name": "Berry",
         "outputs": [
             {
                 "internalType": "contract IERC20",
@@ -95,13 +95,7 @@ export const airDropContractAbi = [
             }
         ],
         "name": "dropEther",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
+        "outputs": [],
         "stateMutability": "payable",
         "type": "function"
     },
@@ -119,13 +113,7 @@ export const airDropContractAbi = [
             }
         ],
         "name": "dropTokens",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
+        "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
@@ -163,26 +151,14 @@ export const airDropContractAbi = [
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "address payable",
-                "name": "beneficiary",
-                "type": "address"
-            }
-        ],
+        "inputs": [],
         "name": "withdrawEther",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
     },
     {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "beneficiary",
-                "type": "address"
-            }
-        ],
+        "inputs": [],
         "name": "withdrawTokens",
         "outputs": [],
         "stateMutability": "nonpayable",
