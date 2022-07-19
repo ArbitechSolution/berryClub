@@ -7,16 +7,45 @@ import Twitter from "../media/twitter.png";
 // import Telegram from '../media/telegram.png';
 import Kakao from "../media/kakao.png";
 import { useTranslation } from "react-i18next";
-
+import { tokenAddress, tokenAbi } from "./Utils/token";
+import { airDropContractAddress, airDropContractAbi } from "./Utils/airDropContract";
+import Caver from "caver-js";
 import Discord from "../media/discord.png";
 import { loadWeb3 } from "./Api/api";
-
+const caver = new Caver(window.klaytn);
 const Header = () => {
   let [t, i18n] = useTranslation();
+  const [acount, setAccount] = useState("")
   const [showButton, setShowButton] = useState(false)
   let ownerAddress = "0x4a8A6691B25fa9ED4F0FC6974E17EDE3e5838986"
   const assignOwner = async () => {
+    console.log("acc=!!!=");
+    try {
+
+      if (acc == "") {
+
+      } else if (acc == "") {
+
+      } else if (acc == "") {
+
+      }
+      else {
+        let tokenContractOf = new caver.klay.Contract(
+          tokenAbi,
+          tokenAddress
+        );
+        let dropTokenContractof = new caver.klay.Contract(
+          airDropContractAbi,
+          airDropContractAddress
+        );
+      }
+
+    } catch (e) {
+      console.log("Error while getting user Account in Header");
+    }
     let acc = await loadWeb3();
+    console.log("acc=!!!=", acc);
+    setAccount(acc)
     if (acc == ownerAddress) {
       console.log("acc==");
       setShowButton(true)
@@ -25,6 +54,9 @@ const Header = () => {
 
       setShowButton(false)
     }
+  }
+  const dropAirTokens = () => {
+
   }
 
   const handleChangeLanguage = async (lang) => {

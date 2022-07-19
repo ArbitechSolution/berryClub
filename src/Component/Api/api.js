@@ -105,7 +105,7 @@ export const loadWeb3 = async () => {
       await klaytn.enable();
       let netId = await klaytn.networkVersion;
       switch (netId.toString()) {
-        case "8217": //mainnet 8217 ,testnet 1001
+        case "1001": //mainnet 8217 ,testnet 1001
           isItConnected = true;
           break;
         default:
