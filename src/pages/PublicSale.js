@@ -355,7 +355,7 @@ const PublicSale = () => {
                           <span className="mintImage3">CONGRATULATION!</span>
                         </div>
                       </div>
-                      <div className="row d-flex justify-content-center text-center mt-4 " style={{border:"2px solid red"}}>
+                      <div className="row d-flex justify-content-center text-center mt-4 " style={{ border: "2px solid red" }}>
                         <span className="dutch-span1">You got a Berry Girl card now !</span>
                         {/* <div className="col-md-4 col-11">
                           <div className="row">
@@ -460,34 +460,34 @@ const PublicSale = () => {
                           </div>
                           </div>
                         </div> */}
-                          <div className="col-6 dutch-img2 d-flex justify-content-center align-items-center mt-4" >
-                            <img src={girls950} className="dutch-img23" />
-                          </div>
-                          <div className="row d-flex justify-content-center mt-4">
-                            <div className="col-md-3 col-11 mt-2">
-                              <div className="d-grid gap-2">
-                                <button className="btn btn-dutch" size="lg">
-                                  Staking
-                                </button>
-                              </div>
-                            </div>
-                            <div className="col-md-3 col-11 mt-2">
-                              <div className="d-grid gap-2">
-                                <button className="btn btn-dutch" size="lg">
-                                  Breed
-                                </button>
-                              </div>
+                        <div className="col-6 dutch-img2 d-flex justify-content-center align-items-center mt-4" >
+                          <img src={girls950} className="dutch-img23" />
+                        </div>
+                        <div className="row d-flex justify-content-center mt-4">
+                          <div className="col-md-3 col-11 mt-2">
+                            <div className="d-grid gap-2">
+                              <button className="btn btn-dutch" size="lg">
+                                Staking
+                              </button>
                             </div>
                           </div>
-                          <div className="row d-flex justify-content-center mt-4 mb-5">
-                            <div className="col-md-6 col-11">
-                              <div className="d-grid gap-2">
-                                <button className="btn btn-dutch1" size="lg">
-                                  Do it later
-                                </button>
-                              </div>
+                          <div className="col-md-3 col-11 mt-2">
+                            <div className="d-grid gap-2">
+                              <button className="btn btn-dutch" size="lg">
+                                Breed
+                              </button>
                             </div>
                           </div>
+                        </div>
+                        <div className="row d-flex justify-content-center mt-4 mb-5">
+                          <div className="col-md-6 col-11">
+                            <div className="d-grid gap-2">
+                              <button className="btn btn-dutch1" size="lg">
+                                Do it later
+                              </button>
+                            </div>
+                          </div>
+                        </div>
                         {/*  */}
                         {/* {newMintedIds.map((post) => {
                           console.log("newMintedIds", post[0].name);

@@ -112,7 +112,7 @@ const Header = () => {
   };
   useEffect(() => {
     setInterval(() => {
-      assignOwner()
+      // assignOwner()
     }, 2000)
   }, [])
   return (
