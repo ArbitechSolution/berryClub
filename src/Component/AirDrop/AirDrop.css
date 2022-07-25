@@ -1,0 +1,101 @@
+.airdrop-image{
+    padding: 120px 0px 60px 0px;
+    background-image: url("../../media/Background - sec 1.png");
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+.airdrop-image1{
+    background-color: rgba(0, 0, 0, 0.75);
+    border-radius: 20px;
+}
+
+.coming-soon{
+    width: 180px;
+}
+
+.airdrop-every{
+    background: linear-gradient(180deg, rgba(46, 194, 225, 0.4) 0%, rgba(46, 194, 225, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
+border-radius: 20px;
+}
+
+.airdrop-h3{
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 700;
+font-size:25px;
+text-align: left;
+line-height: 100%;
+color: #FFFFFF;
+}
+.airdop-p{
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 100%;
+color: #FFFFFF;
+}
+.airdrop-h4{
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 700;
+font-size: 23px;
+line-height: 100%;
+color: #2EBA85;
+}
+.airdrop-h5{
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 700;
+font-size: 22px;
+line-height: 100%;
+color: #2EC2E1;
+}
+.btn-airdrop-button{
+    background: linear-gradient(180deg, #496673 0%, #FBFCFC 60.42%, #AAC8D5 100%);
+mix-blend-mode: normal;
+border-radius: 10px;
+font-family: 'SF UI Text';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 100%;
+color: #000000;
+padding: 14px 0px;
+}
+.btn-airdrop-button2{
+    background: linear-gradient(180deg, #3A6368 0%, #45C3AF 55.21%, #447A7C 100%);
+mix-blend-mode: normal;
+border-radius: 10px;
+font-family: 'SF UI Text';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 100%;
+color: #ffffff;
+padding: 14px 0px;
+}
+.airdrop-box{
+    background: rgba(255, 255, 255, 0.2);
+border-radius: 20px;
+}
+.airdrop-parachute{
+    width: 100px;
+}
+.airdrop-p1{
+    font-family: 'Montserrat';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 100%;
+color: #FFFFFF;
+}
+.airdrop-image3{
+    width: 180px;
+}
+
+.airdropbox1{
+    background: rgba(65, 166, 153, 0.15);
+border-radius: 20px;
+}

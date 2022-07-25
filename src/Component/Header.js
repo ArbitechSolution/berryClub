@@ -176,9 +176,9 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#faq">
+                  <Link to="/airdrop" className="nav-link">
                   AIRDROP
-                  </a>
+                  </Link>
                 </li>
               </ul>
               <div className="social-links" >

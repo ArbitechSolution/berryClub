@@ -10,6 +10,7 @@ import Gallery from "./pages/Gallery";
 import PublicSale from "./pages/PublicSale";
 import NoPage from "./pages/NoPage";
 import CreatingModal from "./Component/modal/creatingModal";
+import AirDrop from "./Component/AirDrop/AirDrop";
 export default function App() {
   return (
     <div>
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/minting" element={<Minting />} />
           <Route path="/public-sale" element={<PublicSale />} />
           <Route path="*" element={<NoPage />} />
+          <Route path="/airdrop" element={<AirDrop/>}/>
         </Route>
       </Routes>
     </div>
