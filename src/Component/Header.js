@@ -175,6 +175,11 @@ const Header = () => {
                     FAQ
                   </a>
                 </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#faq">
+                  AIRDROP
+                  </a>
+                </li>
               </ul>
               <div className="social-links" >
                 <a

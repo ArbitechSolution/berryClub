@@ -14,8 +14,8 @@ export default function App() {
   return (
     <div>
       <ToastContainer />{" "}
-      <CreatingModal />
-      {/* <Routes>
+      {/* <CreatingModal /> */}
+      <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<Home />} />
           <Route path="/gallery" element={<Gallery />} />
@@ -23,7 +23,7 @@ export default function App() {
           <Route path="/public-sale" element={<PublicSale />} />
           <Route path="*" element={<NoPage />} />
         </Route>
-      </Routes> */}
+      </Routes>
     </div>
   );
 }
