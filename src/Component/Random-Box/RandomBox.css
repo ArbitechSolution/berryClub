@@ -1,0 +1,19 @@
+.airdrop-image11{
+    background-color: rgba(0, 0, 0, 0.75);
+  border-radius: 20px;
+  margin-top: 50px !important;
+  margin-bottom: 60px !important;
+  border: 2px solid transparent;
+  position: relative;
+}
+.btn-random-buttun{
+    background: #2EBA85;
+border-radius: 50px;
+font-family: 'Montserrat';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+line-height: 100%;
+color: #FFFFFF;
+padding: 10px 10px !important;
+}

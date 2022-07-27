@@ -176,6 +176,11 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="nav-item">
+                  <Link to="/RandomBox" className="nav-link">
+                  RANDOM BOX
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link to="/airdrop" className="nav-link">
                   AIRDROP
                   </Link>

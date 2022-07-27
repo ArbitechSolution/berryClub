@@ -11,6 +11,7 @@ import PublicSale from "./pages/PublicSale";
 import NoPage from "./pages/NoPage";
 import CreatingModal from "./Component/modal/creatingModal";
 import AirDrop from "./Component/AirDrop/AirDrop";
+import RandomBox from "./Component/Random-Box/RandomBox";
 export default function App() {
   return (
     <div>
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/public-sale" element={<PublicSale />} />
           <Route path="*" element={<NoPage />} />
           <Route path="/airdrop" element={<AirDrop/>}/>
+          <Route path="/RandomBox" element={<RandomBox/>}/>
         </Route>
       </Routes>
     </div>
