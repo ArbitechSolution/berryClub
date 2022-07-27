@@ -17,3 +17,151 @@ line-height: 100%;
 color: #FFFFFF;
 padding: 10px 10px !important;
 }
+.randombox-he{
+  font-family: 'Montserrat';
+font-style: normal;
+font-weight: 700;
+font-size: 25px;
+line-height: 100%;
+color: #FFFFFF;
+}
+.randomBox-bx1{
+  background: #051822;
+border-radius: 20px;
+}
+.mybox-image{
+width: auto;
+}
+
+.steryboxes {
+  background: #123446;
+border-radius: 0px 0px 20px 20px;
+}
+
+.stery-span {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 12%;
+  color: #ffffff;
+  text-align: left;
+}
+
+.stery-span1 {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14%;
+  color: #7E808D;
+  text-align: left;
+
+}
+.randomBox-box11{
+  background: rgba(4, 26, 35, 0.8);
+mix-blend-mode: normal;
+border-radius: 10px;
+}
+.randomBox-miniBox{
+  background: rgba(39, 111, 141, 0.8);
+mix-blend-mode: normal;
+border-radius: 5px 5px 0px 0px;
+}
+.random-Box-span{
+  font-family: 'SF UI Text';
+font-style: normal;
+font-weight: 700;
+font-size: 22px;
+line-height: 100%;
+color: #FFFFFF !important;
+}
+.randomBox-miniBox1{
+  background: rgba(46, 186, 133, 0.6);
+mix-blend-mode: normal;
+}
+.random-pp{
+  font-family: 'SF UI Text';
+font-style: normal;
+font-weight: 700;
+font-size: 22px !important;
+line-height: 100%;
+color: #FFFFFF;
+}
+.random-Box-span1{
+  font-family: 'SF UI Text';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 100%;
+color: #FFFFFF;
+}
+.random-pp1{
+  font-family: 'SF UI Text';
+font-style: normal;
+font-weight: 700;
+font-size: 24px !important;
+line-height: 100%;
+color: #FFFFFF;
+text-align: center;
+}
+.random-box21{
+  width: 30px;
+height: 30px;
+background: rgba(19, 113, 77, 0.2);
+border-radius: 6px;
+
+}
+.random-box22{
+  width: 80px;
+height: 30px;
+background: rgba(19, 113, 77, 0.2);
+border: 1px solid #13714D;
+border-radius: 6px;
+color: #FFFFFF;
+}
+.random-span-box{
+  font-family: 'SF UI Text';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 100%;
+color: #6E7C84;
+text-align: center;
+}
+.randomBox-boes1{
+  background: rgba(255, 255, 255, 0.1);
+mix-blend-mode: normal;
+border-radius: 10px;
+}
+.randomBox-span11{
+  font-family: 'SF UI Text';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 100%;
+color: white;
+}
+
+.btn-raandom-button{
+  background: linear-gradient(180deg, #3A6368 0%, #45C3AF 55.21%, #447A7C 100%);
+mix-blend-mode: normal;
+border-radius: 10px;
+font-family: 'SF UI Text';
+font-style: normal;
+font-weight: 800;
+font-size: 24px;
+line-height: 100%;
+color: #FFFFFF;
+text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.random-box-modal-span{
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 100%;
+  color: #FFFFFF;
+}
+@media(max-width: 480px) {
+  .mybox-image{
+    width: 280px;
+    }
+    
+}

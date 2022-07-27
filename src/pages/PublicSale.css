@@ -197,6 +197,19 @@ hr {
   left: 290px;
 
 }
+.image66{
+  position: absolute; 
+  width: 200px;
+  bottom: -3px;
+  left: 570px;
+
+}
+.image55{
+  position: absolute; 
+  width: 200px;
+  top: -3px;
+  left: 570px;
+}
 .imgArea {
     position: absolute;
     display: flex;
@@ -337,6 +350,13 @@ color: white;
       display: none;
     }
     .image6{
+      display: none;
+    
+    }
+    .image55{
+      display: none;
+    }
+    .image66{
       display: none;
     
     }

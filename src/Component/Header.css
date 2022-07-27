@@ -1,11 +1,13 @@
 #head{
     padding: 5px 0px;
     background-color: #0B2728;
+
 }
 #head nav ul li a{
-    font-size: 16px;
-    font-weight: 500;
-    padding: 0px 10px;
+    font-size: 13px;
+    font-weight: 900;
+    /* padding: 0px 10px; */
+ 
 }
 .langButton{
     font-size: 16px;

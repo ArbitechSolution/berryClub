@@ -120,9 +120,12 @@ const Header = () => {
       <div className="container" id="head">
         <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container d-md-flex" >
+            <div className="col-md-2">
             <Link to="/" className="navbar-brand">
-              <img src={Logo} className="w-75" alt="" />
+              <img src={Logo} width="200px" alt="" />
             </Link>
+            </div>
+            
             <button
               className="navbar-toggler"
               type="button"
@@ -139,7 +142,7 @@ const Header = () => {
               id="navbarSupportedContent"
 
             >
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-center" >
+              <ul className="navbar-nav me-5 mb-2 mb-lg-0 d-flex justify-content-center" >
                 <li className="nav-item">
                   <Link
                     to="/"
@@ -166,14 +169,9 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#roadmap">
-                    ROADMAP
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#faq">
-                    FAQ
-                  </a>
+                  <Link to="/stake" className="nav-link">
+                  STAKING & BREED
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <Link to="/RandomBox" className="nav-link">
@@ -185,8 +183,19 @@ const Header = () => {
                   AIRDROP
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#roadmap">
+                    ROADMAP
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#faq">
+                    FAQ
+                  </a>
+                </li>
+                
               </ul>
-              <div className="social-links" >
+              <div className="social-links ms-md-auto" >
                 <a
                   href="#link"
                   target="_blank"

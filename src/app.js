@@ -12,10 +12,13 @@ import NoPage from "./pages/NoPage";
 import CreatingModal from "./Component/modal/creatingModal";
 import AirDrop from "./Component/AirDrop/AirDrop";
 import RandomBox from "./Component/Random-Box/RandomBox";
+import Footer from "./Component/Footer";
+import Stake from "./Component/Stake-Breed/Stake";
 export default function App() {
   return (
     <div>
       <ToastContainer />{" "}
+   
       {/* <CreatingModal /> */}
       <Routes>
         <Route path="/" element={<Header />}>
@@ -26,8 +29,11 @@ export default function App() {
           <Route path="*" element={<NoPage />} />
           <Route path="/airdrop" element={<AirDrop/>}/>
           <Route path="/RandomBox" element={<RandomBox/>}/>
+       <Route path="/stake" element={<Stake/>}/>
         </Route>
       </Routes>
+
+    
     </div>
   );
 }
