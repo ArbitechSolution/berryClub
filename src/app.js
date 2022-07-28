@@ -14,12 +14,11 @@ import AirDrop from "./Component/AirDrop/AirDrop";
 import RandomBox from "./Component/Random-Box/RandomBox";
 import Footer from "./Component/Footer";
 import Stake from "./Component/Stake-Breed/Stake";
+import Tokenomics from "./Component/Tokenomics/Tokenomics";
 export default function App() {
   return (
     <div>
-      <ToastContainer />{" "}
-   
-      {/* <CreatingModal /> */}
+      <ToastContainer /> {/* <CreatingModal /> */}
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<Home />} />
@@ -27,13 +26,12 @@ export default function App() {
           <Route path="/minting" element={<Minting />} />
           <Route path="/public-sale" element={<PublicSale />} />
           <Route path="*" element={<NoPage />} />
-          <Route path="/airdrop" element={<AirDrop/>}/>
-          <Route path="/RandomBox" element={<RandomBox/>}/>
-       <Route path="/stake" element={<Stake/>}/>
+          <Route path="/airdrop" element={<AirDrop />} />
+          <Route path="/RandomBox" element={<RandomBox />} />
+          <Route path="/stake" element={<Stake />} />
+          <Route path="/tokenomics" element={<Tokenomics/>}/>
         </Route>
       </Routes>
-
-    
     </div>
   );
 }

@@ -117,9 +117,9 @@ const Header = () => {
   }, [])
   return (
     <>
-      <div className="container" id="head">
+      <div className="fluid-container" id="head">
         <nav className="navbar navbar-expand-lg navbar-light">
-          <div className="container d-md-flex" >
+          <div className="container flex-row" >
             <div className="col-md-2">
             <Link to="/" className="navbar-brand">
               <img src={Logo} width="200px" alt="" />
@@ -142,7 +142,7 @@ const Header = () => {
               id="navbarSupportedContent"
 
             >
-              <ul className="navbar-nav me-5 mb-2 mb-lg-0 d-flex justify-content-center" >
+              <ul className="navbar-nav me-5 mb-2 mb-lg-0 d-flex justify-content-center mt-1">
                 <li className="nav-item">
                   <Link
                     to="/"
@@ -151,6 +151,11 @@ const Header = () => {
                     href="/"
                   >
                     HOME
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/tokenomics" className="nav-link">
+                  TOKENOMICS
                   </Link>
                 </li>
                 <li className="nav-item">
